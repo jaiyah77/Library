@@ -11,4 +11,4 @@
 | showAll  | false  | 로딩시 모두 보기 | boolean |true, false
 | speed  | undefined  | 내용 보기 속도 | number | 숫자값
 
-http://kyungtae.com/lab/filter-menu/filter-menu.html
+http://kyungtae.com/MyConponent/filter/index.html

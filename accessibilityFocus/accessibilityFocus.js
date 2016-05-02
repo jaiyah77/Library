@@ -10,9 +10,10 @@ function accessibilityFocus(){
 		}
 		
 		if((!e.shiftKey && !!next) || (e.shiftKey && !!prev)){
-			setTimeout(function (){
-				$('[data-focus="' + target + '"]').focus();
-			}, 1);
+			e.preventDefault();
+			$('[data-focus="' + target + '"]').focus();
 		}
 	});
 }
+
+accessibilityFocus();

@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+	<meta charset="UTF-8">
+	<title>DOM change event catch</title>
+	<link rel="stylesheet" href="index.css">
 </head>
 <body>
 
-<div class="myClass"></div>
+<div class="content">
+	<button type="button">append dom</button>
+	<div class="myClass" data-watch></div>
+</div>
 
-<button type="button">append dom</button>
 </body>
-<script type="text/javascript" src="../vendor/js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="ui.js"></script>
+<script type="text/javascript" src="../@common/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="dom-change.js"></script>
 </html>
