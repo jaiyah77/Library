@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head lang="ko">
+	<meta charset="UTF-8">
+	<title>필터 메뉴</title>
+	<link rel="stylesheet" href="filter.css"/>
+</head>
+<body>
+
+<div class="content filter-01" data-plugIn="filter-menu">
+	<div class="filter-button">
+		<button type="button" data-target="item-01">item-01</button>
+		<button type="button" data-target="item-02">item-02</button>
+		<button type="button" data-target="item-03">item-03</button>
+		<button type="button" data-target="item-04">item-04</button>
+		<button type="button" data-target="item-05">item-05</button>
+	</div>
+	<div class="filter-item">
+		<div data-item="item-01">1</div>
+		<div data-item="item-04">4</div>
+		<div data-item="item-02">2</div>
+		<div data-item="item-03">3</div>
+		<div data-item="item-03">3</div>
+		<div data-item="item-02">2</div>
+		<div data-item="item-03">3</div>
+		<div data-item="item-04">4</div>
+		<div data-item="item-05">5</div>
+	</div>
+</div>
+
+<div class="content filter-02" data-plugIn="filter-menu">
+
+	<div class="filter-button">
+		<button type="button" data-target="item-01">item-01</button>
+		<button type="button" data-target="item-02">item-02</button>
+		<button type="button" data-target="item-03">item-03</button>
+		<button type="button" data-target="item-04">item-04</button>
+		<button type="button" data-target="show-all">show-all</button>
+	</div>
+
+	<div class="filter-item">
+		<div data-item="item-01">1
+
+			<div class="content filter-02-01" data-plugIn="filter-menu">
+				<div class="filter-button">
+					<button type="button" data-target="item-01">item-01</button>
+					<button type="button" data-target="item-02">item-02</button>
+					<button type="button" data-target="item-03">item-03</button>
+					<button type="button" data-target="item-04">item-04</button>
+					<button type="button" data-target="show-all">show-all</button>
+				</div>
+				<div class="filter-item">
+					<div data-item="item-01">1</div>
+					<div data-item="item-04">4</div>
+					<div data-item="item-02">2</div>
+					<div data-item="item-03">3</div>
+					<div data-item="item-03">3</div>
+					<div data-item="item-02">2</div>
+					<div data-item="item-03">3</div>
+					<div data-item="item-04">4</div>
+				</div>
+			</div>
+
+		</div>
+		<div data-item="item-04">4</div>
+		<div data-item="item-02">2</div>
+		<div data-item="item-03">3</div>
+		<div data-item="item-03">3</div>
+		<div data-item="item-02">2</div>
+		<div data-item="item-03">3</div>
+		<div data-item="item-04">4</div>
+	</div>
+</div>
+
+<div class="content filter-03" data-plugIn="filter-menu">
+	<div class="filter-button">
+		<button type="button" data-target="item-01">item-01</button>
+		<button type="button" data-target="item-02">item-02</button>
+		<button type="button" data-target="item-03">item-03</button>
+		<button type="button" data-target="item-04">item-04</button>
+		<button type="button" data-target="show-all">show-all</button>
+	</div>
+
+	<div class="filter-item">
+		<div data-item="item-01">1</div>
+		<div data-item="item-04">4</div>
+		<div data-item="item-02">2</div>
+		<div data-item="item-03">3</div>
+		<div data-item="item-03">3</div>
+		<div data-item="item-02">2</div>
+		<div data-item="item-03">3</div>
+		<div data-item="item-04">4</div>
+	</div>
+</div>
+
+
+<div class="content filter-04" data-plugIn="filter-menu">
+	<div class="filter-button">
+		<button type="button" data-target="item-01">item-01</button>
+		<button type="button" data-target="item-02">item-02</button>
+		<button type="button" data-target="item-03">item-03</button>
+		<button type="button" data-target="item-04">item-04</button>
+		<button type="button" data-target="show-all">show-all</button>
+	</div>
+
+	<div class="filter-item">
+		<div data-item="item-01">1</div>
+		<div data-item="item-04">4</div>
+		<div data-item="item-02">2</div>
+		<div data-item="item-03">3</div>
+		<div data-item="item-03">3</div>
+		<div data-item="item-02">2</div>
+		<div data-item="item-03">3</div>
+		<div data-item="item-04">4</div>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="../vendor/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="filter.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+body { padding: 0; margin: 0; font-size: 14px; background: #e4e4e4; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+label { vertical-align: middle; display: block; margin-bottom: 5px; }
+
+input[type="text"] { width: 100%; border: 1px solid #e8e8e8; vertical-align: middle; padding: 2px 5px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+.btn-calculation { text-align: center; margin-bottom: 0; }
+
+.btn-calculation button { background: #ec971f; color: #fff; border: none; padding: 10px 0; width: 100%; font-weight: bold; cursor: pointer; }
+
+.btn-calculation button:hover { background: #666; }
+
+p { margin: 0 0 10px 0; }
+
+.gas { background: #fff; max-width: 400px; min-height: 100%; border: 10px solid #6f6f6f; margin: 0 auto; padding: 20px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+.gas .tit { margin: 0 0 30px 0; font-size: 18px; }
+
+.result { margin-top: 20px; padding-top: 20px; border-top: 1px dotted #ccc; }
+
+.out-link { margin-top: 20px; padding-top: 20px; border-top: 1px dotted #ccc; }
+
+.out-link a { display: block; color: #000; }
+
+.out-link a + a { margin-top: 15px; }
+
+/*# sourceMappingURL=index.css.map */

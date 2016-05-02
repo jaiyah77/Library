@@ -1,0 +1,53 @@
+// import reset
+@import "../../lib/sass/reset";
+@import "../../lib/sass/font";
+@import "../../lib/sass/common";
+.wrap{
+	position:relative;
+	border:1px solid #000;
+	overflow:hidden;
+	.layout{
+		font-size:14px;
+		border:1px solid #ccc;
+		box-sizing:border-box;
+		width:33.333333%;
+		display:block;
+		float:left;
+		position:relative;
+		margin-bottom:-99999px;
+		padding-bottom:99999px;
+	}
+	.a{
+		background:#eaeaea;
+	}
+
+	.b{
+		background:#eaeaea;
+	}
+
+	.c{
+		background:#eaeaea;
+	}
+	div.padding-box{
+		background:green;
+		padding:20px;
+		background-clip:content-box;
+		height:100%;
+	}
+}
+
+.wrap2{
+	margin-top:20px;
+	background:#ccc;
+	height:100px;
+	&:after{
+		content:"";
+		display:block;
+		clear:both;
+	}
+	.a{
+		float:right;
+		background:green;
+		height:100%;
+	}
+}

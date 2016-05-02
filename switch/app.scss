@@ -1,0 +1,28 @@
+@import "../@common/_reset";
+
+.expand-button{
+	position:relative;
+	display:block;
+	border:1px solid #ccc;
+	padding:15px;
+	&:after{
+		content:'\3E';
+		position:absolute;
+		right:15px;
+		-webkit-transform:rotate(90deg);
+		-moz-transform:rotate(90deg);
+		-ms-transform:rotate(90deg);
+		transform:rotate(90deg);
+	}
+}
+
+.expand-box{
+	display:none;
+	border:1px solid #ddd;
+	margin-top:10px;
+	padding:10px;
+}
+
+.expand-box.active{
+	display:block;
+}

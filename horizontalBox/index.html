@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>horizontal Box</title>
+    <link rel="stylesheet" href="sample.css"/>
+</head>
+<body>
+<h1>horizontal box</h1>
+
+<div class="contain">
+    <div class="sample-box">
+        <h2>SAMPLE 1</h2>
+
+        <div class="scroll-sample-01">
+            <div class="scroller">
+                <ul>
+                    <li><img src="img/1.png" alt=""/></li>
+                    <li><img src="img/2.png" alt=""/></li>
+                    <li><img src="img/3.png" alt=""/></li>
+                    <li><img src="img/4.png" alt=""/></li>
+                    <li><img src="img/5.png" alt=""/></li>
+                    <li><img src="img/6.png" alt=""/></li>
+                    <li><img src="img/7.png" alt=""/></li>
+                    <li><img src="img/8.png" alt=""/></li>
+                    <li><img src="img/9.png" alt=""/></li>
+                    <li><img src="img/10.png" alt=""/></li>
+                    <li><img src="img/11.png" alt=""/></li>
+                    <li><img src="img/12.png" alt=""/></li>
+                    <li><img src="img/13.png" alt=""/></li>
+                    <li><img src="img/14.png" alt=""/></li>
+                    <li><img src="img/15.png" alt=""/></li>
+                    <li><img src="img/16.png" alt=""/></li>
+                    <li><img src="img/17.png" alt=""/></li>
+                    <li><img src="img/18.png" alt=""/></li>
+                    <li><img src="img/19.png" alt=""/></li>
+                    <li><img src="img/20.png" alt=""/></li>
+                </ul>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text"></div>
+            <div class="desc-code">
+<pre>
+$('.scroll-sample-01').horizontalBox();
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 2</h2>
+
+        <div class="scroll-sample-02">
+            <div class="scroller">
+                <ul>
+                    <li><img src="img/1.png" alt=""/></li>
+                    <li><img src="img/2.png" alt=""/></li>
+                    <li><img src="img/3.png" alt=""/></li>
+                    <li><img src="img/4.png" alt=""/></li>
+                </ul>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text">
+                가로 모드시 스크롤의 길이가 짧아지면 동작 안함
+            </div>
+            <div class="desc-code">
+<pre>
+$('.scroll-sample-02').horizontalBox();
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 3</h2>
+
+        <div class="scroll-sample-03">
+            <div class="scroller">
+                <ul>
+                    <li class="item"><img src="img/1.png" alt=""/></li>
+                    <li class="item"><img src="img/2.png" alt=""/></li>
+                    <li class="item"><img src="img/3.png" alt=""/></li>
+                    <li class="item"><img src="img/4.png" alt=""/></li>
+                    <li class="item"><img src="img/5.png" alt=""/></li>
+                    <li class="item"><img src="img/6.png" alt=""/></li>
+                    <li class="item"><img src="img/7.png" alt=""/></li>
+                    <li class="item"><img src="img/8.png" alt=""/></li>
+                    <li class="item"><img src="img/9.png" alt=""/></li>
+                    <li class="item"><img src="img/10.png" alt=""/></li>
+                    <li class="item"><img src="img/11.png" alt=""/></li>
+                    <li class="item"><img src="img/12.png" alt=""/></li>
+                    <li class="item"><img src="img/13.png" alt=""/></li>
+                    <li class="item"><img src="img/14.png" alt=""/></li>
+                    <li class="item"><img src="img/15.png" alt=""/></li>
+                    <li class="item"><img src="img/16.png" alt=""/></li>
+                    <li class="item"><img src="img/17.png" alt=""/></li>
+                    <li class="item"><img src="img/18.png" alt=""/></li>
+                    <li class="item"><img src="img/19.png" alt=""/></li>
+                    <li class="item"><img src="img/20.png" alt=""/></li>
+                </ul>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text"></div>
+            <div class="desc-code">
+<pre>
+$('.scroll-sample-03').horizontalBox({
+	'snap': true,
+	'snapItem': '.item'
+});
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 4</h2>
+
+        <div class="scroll-sample-04">
+            <div class="scroller">
+                <ul>
+                    <li class="item"><img src="img/1.png" alt=""/></li>
+                    <li class="item"><img src="img/2.png" alt=""/></li>
+                    <li class="item"><img src="img/3.png" alt=""/></li>
+                    <li class="item"><img src="img/4.png" alt=""/></li>
+                    <li class="item"><img src="img/5.png" alt=""/></li>
+                    <li class="item"><img src="img/6.png" alt=""/></li>
+                    <li class="item"><img src="img/7.png" alt=""/></li>
+                    <li class="item"><img src="img/8.png" alt=""/></li>
+                    <li class="item"><img src="img/9.png" alt=""/></li>
+                    <li class="item"><img src="img/10.png" alt=""/></li>
+                    <li class="item"><img src="img/11.png" alt=""/></li>
+                    <li class="item"><img src="img/12.png" alt=""/></li>
+                    <li class="item"><img src="img/13.png" alt=""/></li>
+                    <li class="item"><img src="img/14.png" alt=""/></li>
+                    <li class="item"><img src="img/15.png" alt=""/></li>
+                    <li class="item"><img src="img/16.png" alt=""/></li>
+                    <li class="item"><img src="img/17.png" alt=""/></li>
+                    <li class="item"><img src="img/18.png" alt=""/></li>
+                    <li class="item"><img src="img/19.png" alt=""/></li>
+                    <li class="item"><img src="img/20.png" alt=""/></li>
+                </ul>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text">
+                'momentum': false 옵션 추가로 관성스크롤 기능 제거
+            </div>
+            <div class="desc-code">
+<pre>
+$('.scroll-sample-04').horizontalBox({
+	'snap': true,
+	'snapItem': '.item',
+	'momentum': false
+});
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 5</h2>
+
+        <div class="scroll-sample-05">
+            <div class="scroller">
+                <ul>
+                    <li class="item"><img src="img/1.png" alt=""/></li>
+                    <li class="item"><img src="img/2.png" alt=""/></li>
+                    <li class="item"><img src="img/3.png" alt=""/></li>
+                    <li class="item"><img src="img/4.png" alt=""/></li>
+                    <li class="item"><img src="img/5.png" alt=""/></li>
+                </ul>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text">
+                'momentum': false 옵션 추가로 관성스크롤 기능 제거
+            </div>
+            <div class="desc-code">
+<pre>
+$('.scroll-sample-05').horizontalBox({
+    'snap': true,
+    'snapItem': '.item',
+    'momentum': false
+});
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 6</h2>
+
+        <div class="card-sample-01">
+            <div class="scroller">
+                <div class="flick-panel">
+                    <div class="flick-sample-11">
+                        <div class="scroller">
+                            <div class="flick-panel">
+                                <div class="color-01">
+                                    <p>flick-01</p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="color-02">
+                                    <p>flick-02</p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="color-03">
+                                    <p>flick-03</p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="color-04">
+                                    <p>flick-04</p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="color-05">
+                                    <p>flick-05</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><a href="http://naver.com" target="_blank"><img src="img/2.png" alt=""/></a></p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><img src="img/3.png" alt=""/></p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><img src="img/4.png" alt=""/></p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><img src="img/5.png" alt=""/></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-sample-01">
+            <div class="scroller">
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><img src="img/1.png" alt=""/></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-sample-01">
+            <div class="scroller">
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><img src="img/1.png" alt=""/></p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><img src="img/2.png" alt=""/></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-sample-01">
+            <div class="scroller">
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><img src="img/1.png" alt=""/></p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><img src="img/2.png" alt=""/></p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><img src="img/3.png" alt=""/></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text"></div>
+            <div class="desc-code">
+<pre>
+$('.card-sample-01').horizontalBox({
+	'ui': 'card',
+    'indicator': true
+});
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 7</h2>
+
+        <div class="card-sample-02">
+            <div class="scroller">
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><img src="img/1.png" alt=""/></p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><img src="img/2.png" alt=""/></p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><img src="img/3.png" alt=""/></p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><img src="img/4.png" alt=""/></p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="con">
+                        <p><img src="img/5.png" alt=""/></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text">
+                오토 플레이 기본속도 3000ms
+            </div>
+            <div class="desc-code">
+<pre>
+$('.card-sample-02').horizontalBox({
+    'ui': 'card',
+    'autoPlay': true,
+    'indicator': true,
+    'indicatorType': 'number',
+    'playSpeed': 2000
+});
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 8</h2>
+
+        <div class="flick-sample-01">
+            <div class="scroller">
+                <div class="flick-panel">
+                    <div class="color-01">
+                        <p>flick-01</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-02">
+                        <p>flick-02</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-03">
+                        <p>flick-03</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text"></div>
+            <div class="desc-code">
+<pre>
+$('.flick-sample-01').horizontalBox({
+	'ui': 'flick'
+});
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 9</h2>
+
+        <div class="flick-sample-02">
+            <div class="scroller">
+                <div class="flick-panel">
+                    <div class="color-01">
+                        <p>flick-01</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-02">
+                        <p>flick-02</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-03">
+                        <p>flick-03</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-04">
+                        <p>flick-04</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-05">
+                        <p>flick-05</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text"></div>
+            <div class="desc-code">
+<pre>
+$('.flick-sample-02').horizontalBox({
+    'ui': 'flick',
+    'indicator': true
+});
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 10</h2>
+
+        <div class="flick-sample-03">
+            <div class="scroller">
+                <div class="flick-panel">
+                    <div class="color-01">
+                        <p>flick-01</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-02">
+                        <p>flick-02</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-03">
+                        <p>flick-03</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-04">
+                        <p>flick-04</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-05">
+                        <p>flick-05</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text">
+                indicatorType 기본값 dot
+            </div>
+            <div class="desc-code">
+<pre>
+$('.flick-sample-03').horizontalBox({
+    'ui': 'flick',
+    'autoPlay': true,
+    'indicator': true,
+    'indicatorType': 'number'
+});
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 11</h2>
+
+        <div class="flick-sample-04">
+            <div class="scroller">
+                <div class="flick-panel">
+                    <div class="color-01">
+                        <p>flick-01</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-02">
+                        <p>flick-02</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-03">
+                        <p>flick-03</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-04">
+                        <p>flick-04</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-05">
+                        <p>flick-05</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text">
+                점, 컨트롤 버튼의 모양과 위치는 css로 조정함
+            </div>
+            <div class="desc-code">
+<pre>
+$('.flick-sample-04').horizontalBox({
+    'ui': 'flick',
+    'indicator': true,
+    'control': true
+});
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 12</h2>
+
+        <div class="flick-sample-05">
+            <div class="scroller">
+                <div class="flick-panel">
+
+                    <div class="flick-sample-in">
+                        <div class="scroller">
+                            <div class="flick-panel">
+                                <div class="color-01">
+                                    <p>flick-01</p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="color-02">
+                                    <p>flick-02</p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="color-03">
+                                    <p>flick-03</p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="color-04">
+                                    <p>flick-04</p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="color-05">
+                                    <p>flick-05</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="flick-panel">
+                    <div class="color-02">
+                        <p>flick-02</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="scroll-sample-in">
+                        <div class="scroller">
+                            <ul>
+                                <li class="item"><img src="img/1.png" alt=""/></li>
+                                <li class="item"><img src="img/2.png" alt=""/></li>
+                                <li class="item"><img src="img/3.png" alt=""/></li>
+                                <li class="item"><img src="img/4.png" alt=""/></li>
+                                <li class="item"><img src="img/5.png" alt=""/></li>
+                                <li class="item"><img src="img/6.png" alt=""/></li>
+                                <li class="item"><img src="img/7.png" alt=""/></li>
+                                <li class="item"><img src="img/8.png" alt=""/></li>
+                                <li class="item"><img src="img/9.png" alt=""/></li>
+                                <li class="item"><img src="img/10.png" alt=""/></li>
+                                <li class="item"><img src="img/11.png" alt=""/></li>
+                                <li class="item"><img src="img/12.png" alt=""/></li>
+                                <li class="item"><img src="img/13.png" alt=""/></li>
+                                <li class="item"><img src="img/14.png" alt=""/></li>
+                                <li class="item"><img src="img/15.png" alt=""/></li>
+                                <li class="item"><img src="img/16.png" alt=""/></li>
+                                <li class="item"><img src="img/17.png" alt=""/></li>
+                                <li class="item"><img src="img/18.png" alt=""/></li>
+                                <li class="item"><img src="img/19.png" alt=""/></li>
+                                <li class="item"><img src="img/20.png" alt=""/></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-04">
+                        <p>flick-04</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-05">
+                        <p>flick-05</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text">
+                반복을 원하지 않을 경우 loop옵션을 false로 설정한다.
+            </div>
+            <div class="desc-code">
+<pre>
+$('.flick-sample-05').horizontalBox({
+    'ui': 'flick',
+    'indicator': true,
+    'control': true,
+    'loop': false
+});
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 13</h2>
+
+        <div class="flick-sample-06">
+            <div class="scroller">
+                <div class="flick-panel">
+                    <div class="color-01">
+                        <p>flick-01</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-02">
+                        <p>flick-02</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-03">
+                        <p>flick-03</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-04">
+                        <p>flick-04</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-05">
+                        <p>flick-05</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text">
+                flick 동작 후 콜백을 호출 하려면 아래와 같이 callback 옵션에 호출할 함수를 넣어준다.
+            </div>
+            <div class="desc-code">
+<pre>
+$('.flick-sample-06').horizontalBox({
+    'ui': 'flick',
+    'indicator': true,
+    'control': true,
+    'callback': function () {
+        var data = $('.flick-sample-06').data();
+        console.log('This is flick count number:',
+                data.horizontalBox.detect.flickCount);
+    }
+});
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 14</h2>
+
+        <div class="flick-sample-07">
+            <div class="scroller">
+                <div class="flick-panel">
+                    <div class="color-01">
+                        <p>flick-01</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-02">
+                        <p>flick-02</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-03">
+                        <p>flick-03</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-04">
+                        <p>flick-04</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-05">
+                        <p>flick-05</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text">
+                start옵션을 이용해 시작될 위치를 설정할 수 있다. 0부터 시작!
+            </div>
+            <div class="desc-code">
+<pre>
+$('.flick-sample-07').horizontalBox({
+    'ui': 'flick',
+    'indicator': true,
+    'indicatorType': 'number',
+    'start': 3
+});
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 15</h2>
+
+        <div class="navi">
+            <div class="scroller">
+                <ul>
+                    <li class="navi-item"><a href="#panel-01">navi1</a></li>
+                    <li class="navi-item"><a href="#navi-02">navi2</a></li>
+                    <li class="navi-item selected"><a href="#con-01">navi3</a></li>
+                    <li class="navi-item"><a href="#panel-02">navi4</a></li>
+                    <li class="navi-item"><a href="#con5">navi5</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flick-sample-08">
+            <div class="scroller">
+                <div class="flick-panel">
+                    <div class="color-01" id="panel-01">
+                        <p>flick-01</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-02" id="navi-02">
+                        <p>flick-02</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-03" id="con-01">
+                        <p>flick-03</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-04" id="panel-02">
+                        <p>flick-04</p>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="color-05" id="con5">
+                        <p>flick-05</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text">
+                연결 하고 싶은 곳 네비$('.navi')의 선택자를 아래와 같은 형태로 $('.flick-sample-08').horizontalBox()호출시 옵션으로 지정해준다.<br><br>
+<pre>
+'navi': {
+	wrapper: '.navi',
+	onTarget: '.navi-item'
+}
+</pre>
+                연결하고 싶은 네비($('.navi'))의 detect값을 이용하기 위해 스크롤을 반드시 먼저 셋팅해준다.
+            </div>
+            <div class="desc-code">
+<pre>
+$('.navi').horizontalBox();
+
+$('.flick-sample-08').horizontalBox({
+    'ui': 'flick',
+    'indicator': true,
+    'control': true,
+    'navi': {
+        wrapper: '.navi',
+        onTarget: '.navi-item'
+    },
+    'start': 2
+});
+</pre>
+            </div>
+        </div>
+    </div>
+    <div class="sample-box">
+        <h2>SAMPLE 16</h2>
+
+        <div class="flick-sample-09">
+            <div class="scroller">
+                <div class="flick-panel">
+                    <div class="flick-sample-in">
+                        <div class="scroller">
+                            <div class="flick-panel">
+                                <div class="color-01">
+                                    <p>flick-01</p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="color-02">
+                                    <p>flick-02</p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="color-03">
+                                    <p>flick-03</p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="color-04">
+                                    <p>flick-04</p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="color-05">
+                                    <p>flick-05</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="scroll-sample-in">
+                        <div class="scroller">
+                            <ul>
+                                <li class="item"><img src="img/1.png" alt=""/></li>
+                                <li class="item"><img src="img/2.png" alt=""/></li>
+                                <li class="item"><img src="img/3.png" alt=""/></li>
+                                <li class="item"><img src="img/4.png" alt=""/></li>
+                                <li class="item"><img src="img/5.png" alt=""/></li>
+                                <li class="item"><img src="img/6.png" alt=""/></li>
+                                <li class="item"><img src="img/7.png" alt=""/></li>
+                                <li class="item"><img src="img/8.png" alt=""/></li>
+                                <li class="item"><img src="img/9.png" alt=""/></li>
+                                <li class="item"><img src="img/10.png" alt=""/></li>
+                                <li class="item"><img src="img/11.png" alt=""/></li>
+                                <li class="item"><img src="img/12.png" alt=""/></li>
+                                <li class="item"><img src="img/13.png" alt=""/></li>
+                                <li class="item"><img src="img/14.png" alt=""/></li>
+                                <li class="item"><img src="img/15.png" alt=""/></li>
+                                <li class="item"><img src="img/16.png" alt=""/></li>
+                                <li class="item"><img src="img/17.png" alt=""/></li>
+                                <li class="item"><img src="img/18.png" alt=""/></li>
+                                <li class="item"><img src="img/19.png" alt=""/></li>
+                                <li class="item"><img src="img/20.png" alt=""/></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="flick-panel">
+                    <div class="card-sample-in">
+                        <div class="scroller">
+                            <div class="flick-panel">
+                                <div class="con">
+                                    <p><img src="img/1.png" alt=""/></p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="con">
+                                    <p><img src="img/2.png" alt=""/></p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="con">
+                                    <p><img src="img/3.png" alt=""/></p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="con">
+                                    <p><img src="img/4.png" alt=""/></p>
+                                </div>
+                            </div>
+                            <div class="flick-panel">
+                                <div class="con">
+                                    <p><img src="img/5.png" alt=""/></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desc">
+            <div class="desc-text">
+                플리크 속에 플리크, 카드, 스크롤 등도 넣을수 있다. 단, 플리크 속에 있는 내용을 먼저 플러그인 함수로 호출하여야 함.
+            </div>
+            <div class="desc-code">
+<pre>
+$('.flick-sample-07').horizontalBox({
+    'ui': 'flick',
+    'indicator': true,
+    'indicatorType': 'number',
+    'start': 3
+});
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="horizontalBox.js"></script>
+</body>
+</html>

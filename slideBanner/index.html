@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>window popup</title>
+</head>
+<style>
+	*{margin: 0;padding: 0;}
+	body {font-size: 12px;margin: 50px;}
+	li {list-style: none;}
+	.advice-product {margin-top: 30px; padding: 0 30px 0 12px;}
+	.advice-product:after {clear: both; display:block; content:""}
+	.advice-product .p-tab {float: left; width: 122px;height: 117px;border: 1px solid #ccc;}
+	.advice-product .p-tab li a {display: inline-block;color: #333; padding: 7px 20px 8px 20px; margin: 2px 0; }
+	.advice-product .p-tab li.active a {background-color: #aa7f5d;}
+	.advice-product .p-tab li:nth-child(1) a {margin-top: 12px;}
+	.advice-product .p-category {overflow: hidden;height: 115px;position: relative;margin-left: 150px;}
+	.advice-product .p-list {position: absolute;top: 0;left: 0;display: none;}
+	.advice-product .p-list.active {display: block;}
+	.advice-product .p-list li {float: left;border: 1px solid #000; width: 226px;height: 113px;text-align: center;margin-left: 10px;position: relative;}
+	.advice-product .p-list li:first-child {margin-left: 0;}
+	.advice-product .p-list li > a { display: table-cell; width: 226px;height: 117px;text-align: center;vertical-align: middle;font-size: 18px;}
+	.advice-product .p-list li.on > a{display: none;}
+	.advice-product .p-list {}
+</style>
+<body>
+
+<div class="advice-product">
+	<ul class="p-tab">
+		<li class="active"><a href="#advice-product-01">베스트 상품</a></li>
+		<li><a href="#advice-product-02">맞춤 상품</a></li>
+		<li><a href="#advice-product-03">추천 상품</a></li>
+	</ul>
+
+	<div class="p-category">
+		<ul class="p-list active" id="advice-product-01">
+			<li class="flag-01">
+				베스트 상품
+			</li>
+			<li class="flag-02">
+				베스트 상품
+			</li>
+			<li class="flag-03">
+				베스트 상품
+			</li>
+		</ul>
+		<ul class="p-list" id="advice-product-02">
+			<li class="flag-01">
+				맞춤 상품
+			</li>
+			<li class="flag-02">
+				맞춤 상품
+			</li>
+			<li class="flag-03">
+				맞춤 상품
+			</li>
+		</ul>
+		<ul class="p-list" id="advice-product-03">
+			<li class="flag-01">
+				추천 상품
+			</li>
+			<li class="flag-02">
+				추천 상품
+			</li>
+			<li class="flag-03">
+				추천 상품
+			</li>
+		</ul>
+	</div>
+
+</div>
+
+
+<script src="../../common/vendor/jquery-1.11.2.min.js"></script>
+<script src="../common.js"></script>
+<script src="page.js"></script>
+</body>
+</html>

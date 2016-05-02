@@ -1,0 +1,35 @@
+<table>
+	<thead>
+	<tr>
+		<th>NO</th>
+		<th>Depth</th>
+		<th>File Directory(URL)</th>
+		<th>
+			<select title="담당자">
+				<option value=""></option>
+			</select>
+		</th>
+		<th>검수여부</th>
+		<th>
+			<select title="수정일">
+				<option value=""></option>
+			</select>
+		</th>
+		<th>상태</th>
+	</tr>
+	</thead>
+	<tbody ng-repeat="item in main.data.dataList">
+	<tr class="title-bar">
+		<td colspan="7">{{item.listName}} ({{item.list.length}})</td>
+	</tr>
+	<tr ng-repeat="unit in item.list">
+		<td class="index">{{$index+1}}</td>
+		<td>{{ unit.name }}</td>
+		<td>{{ unit.id }}</td>
+		<td>{{ unit.owner }}</td>
+		<td>{{ unit.review }}</td>
+		<td>{{ unit.date }}</td>
+		<td>{{ unit.state }}</td>
+	</tr>
+	</tbody>
+</table>

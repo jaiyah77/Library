@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="ko">
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="app.css"/>
+</head>
+<body>
+
+<div class="content">
+	<div class="gallery-view">
+
+		<div class="ctrl">
+			<div class="thumbnail-link">
+				<ul class="scroll-wrap">
+					<li><a href="#v1" class="active"><img src="http://lorempixel.com/80/50/city/1" alt="" /></a></li>
+					<li><a href="#v2"><img src="http://lorempixel.com/80/50/city/2" alt="" /></a></li>
+					<li><a href="#v3"><img src="http://lorempixel.com/80/50/city/3" alt="" /></a></li>
+				</ul>
+			</div>
+
+			<div class="view-ctrl">
+				<a href="#none" class="btn-prev active">이전 보기</a>
+				<a href="#none" class="btn-next active">다음 보기</a>
+			</div>
+		</div>
+
+		<ul class="view-list">
+			<li id="v1" class="item active">
+				<p class="img"><img src="http://lorempixel.com/600/350/city/1" alt="" /></p>
+				<p class="text"><strong>111 도시 </strong> / 와우</p>
+			</li>
+			<li id="v2" class="item">
+				<p class="img"><img src="http://lorempixel.com/600/350/city/2" alt="" /></p>
+				<p class="text"><strong>222 도시 </strong> / 와우</p>
+			</li>
+			<li id="v3" class="item">
+				<p class="img"><img src="http://lorempixel.com/600/350/city/3" alt="" /></p>
+				<p class="text"><strong>333 도시 </strong> / 와우</p>
+			</li>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript" src="../vendor/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+</body>
+</html>

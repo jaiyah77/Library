@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="ko">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>우리집 가스요금 계산기</title>
+	<link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class="gas">
+	<h1 class="tit">우리집 가스요금 계산기</h1>
+	<p>
+		<label for="prev-month">전월지침</label>
+		<input type="text" id="prev-month"/>
+	</p>
+	<p>
+		<label for="next-month">당월지침</label>
+		<input type="text" id="next-month"/>
+	</p>
+	<p class="btn-calculation">
+		<button type="button" class="calculation">계산하기</button>
+	</p>
+	<div class="result">
+		<p class="use"><strong>가스 사용량:</strong> <span class="num">0</span></p>
+		<p class="charge"><strong>예상 가스비:</strong> <span class="num">0</span> 원</p>
+	</div>
+	<p class="out-link">
+		<a href="http://www.skens.com/koone/content/view.do?cate=service&m1=supplyaskcharge&m2=fareguide" target="_blank">가스 요금안내 및 계산방법 보기</a>
+		<a href="http://www.skens.com/koone/content/view.do?cate=service&m1=supplyaskcharge&m2=readguide" target="_blank">가스 검침방법 보기</a>
+	</p>
+</div>
+<script type="text/javascript" src="../@common/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+</body>
+</html>

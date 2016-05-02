@@ -1,0 +1,1 @@
+angular.module('Work.Dashboard', ['Work.Common']);

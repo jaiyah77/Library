@@ -1,0 +1,16 @@
+* { margin: 0; padding: 0; }
+
+.wall { margin: 10px; padding: 10px; border: 1px solid #cccccc; }
+
+.spin-box { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; position: relative; width: 500px; padding: 0 40px; line-height: 1; }
+.spin-box input { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; width: 100%; border: 0; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; height: 40px; line-height: 40px; text-align: center; }
+.spin-box button { position: absolute; width: 40px; height: 40px; line-height: 40px; text-align: center; border: none; top: 0; background: #032141; color: #ffffff; cursor: pointer; }
+.spin-box button:active { background: #03558d; color: #ffffff; }
+.spin-box button:after { position: absolute; top: 0; left: 0; text-indent: 0; width: 40px; height: 40px; line-height: 40px; text-align: center; }
+.spin-box button.btn-plus { display: block; overflow: hidden; text-indent: -999999px; right: 0; }
+.spin-box button.btn-plus:after { display: block; content: "+"; }
+.spin-box button.btn-minus { display: block; overflow: hidden; text-indent: -999999px; left: 0; }
+.spin-box button.btn-minus:after { display: block; content: "-"; }
+.spin-box button.reset { right: -45px; }
+
+/*# sourceMappingURL=app.css.map */

@@ -1,0 +1,17 @@
+// import reset
+@import "../../vendor/sass/reset";
+@import "../../vendor/sass/font";
+@import "../../vendor/sass/common";
+.marquee{
+  width:500px;
+  height:20px;
+  overflow:hidden;
+  position:relative;
+
+  .queue{
+    height:20px;
+    line-height:20px;
+    white-space:nowrap;
+    word-break:break-all;
+  }
+}

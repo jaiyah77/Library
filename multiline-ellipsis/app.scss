@@ -1,0 +1,35 @@
+.name{
+	width:200px;
+	overflow:hidden;
+	position:relative;
+	height:50px;
+	line-height:25px;
+	margin:20px;
+	border:1px solid #ccc;
+
+	&:before{
+		content:"";
+		float:left;
+		width:5px;
+		height:49px;
+	}
+
+	&:after{
+		content:"\02026";
+		float:right;
+		position:relative;
+		top:-19px;
+		left:100%;
+		width:25px;
+		margin-left:-20px;
+		background:#fff;
+	}
+
+	> p{
+		float:right;
+		width:100%;
+		margin-left:-5px;
+		text-align:center;
+		word-break:break-all;
+	}
+}

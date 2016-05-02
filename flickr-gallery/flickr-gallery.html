@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="ko">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="flickr.css"/>
+	<title>flickr</title>
+</head>
+<body>
+<div class="content">
+	<div class="pic-list"></div>
+	<div class="btn-set">
+		<button type="button" class="btn-more">더보기</button>
+	</div>
+</div>
+<script type="text/javascript" src="../../lib/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../../lib/js/doT.min.js"></script>
+<script type="text/javascript" src="flickr.js"></script>
+<script type="text/plain" id="temp-photo-list">
+	<li>
+		<span><img src="http://farm{{=it.farm}}.static.flickr.com/{{=it.server}}/{{=it.id}}_{{=it.secret}}.jpg"/></span>
+		<div>{{=it.title}}</div>
+	</li>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+// import reset
+@import "../../lib/sass/reset";
+@import "../../lib/sass/font";
+@import "../../lib/sass/common";
+
+
+ul{
+	background:#ccc;
+	display:table;
+	width:100%;
+}
+
+li{
+	background:#F00;
+	display:inline-table;
+	width:33.333333%;
+	padding:20px;
+	box-sizing:border-box;
+}

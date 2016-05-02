@@ -1,0 +1,32 @@
+// import reset
+@import "reset";
+
+//page css
+
+body {
+	margin:0;
+	padding:0;
+}
+.wrap {
+	width:1000px;
+	margin:0 auto;
+}
+table {
+	width:100%;
+	border-spacing:0;
+	border-collapse:collapse;
+
+	thead th {
+		background:#0066CC;
+		color:#fff;
+	}
+}
+.bg-color {
+	background:#C09853;
+}
+.on {
+	background:#b45d00;
+}
+td, th {
+	border:1px solid #eee;
+}

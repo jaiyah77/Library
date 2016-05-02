@@ -1,0 +1,24 @@
+* { margin: 0; padding: 0; }
+
+body { font-size: 12px; color: #000; }
+
+ul, li, ol { list-style: none; }
+
+a { text-decoration: none; color: #000; }
+
+.project-name { text-align: center; margin: 120px 0; font-size: 40px; }
+
+.f-list { text-align: center; }
+.f-list li { display: inline-table; width: 300px; height: 400px; margin: 0 20px; border: 1px solid #ccc; border-radius: 10px; -webkit-box-shadow: 1px 1px 10px #ddd; -moz-box-shadow: 1px 1px 10px #ddd; box-shadow: 1px 1px 10px #ddd; }
+.f-list li a { font-size: 24px; font-weight: bold; display: table-cell; text-align: center; vertical-align: middle; }
+
+.dataBox { display: none; }
+
+.title-bar { background: #000; color: #fff; }
+
+table { width: 100%; border-collapse: collapse; }
+table td { border: 1px solid #ccc; padding: 10px; }
+table th { border: 1px solid #ccc; }
+table .index { text-align: center; }
+
+/*# sourceMappingURL=index.css.map */

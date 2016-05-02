@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>textarea expand</title>
+    <link rel="stylesheet" href="app.css"/>
+</head>
+<body>
+
+<div class="content">
+    <div class="text-box">
+        <h2>option</h2>
+        <p>line: 확장가능한 줄의 수</p><br>
+		<pre>
+$('.input-textarea').expandArea({
+    line:2 // 확장가능한 줄의 수 값 설정(숫자형)
+});
+		</pre>
+
+        <p><label for="a1">줄 재설정</label></p>
+        <input type="text" value="2" id="a1" style="width:50px;"/>
+        <button type="button" class="reset">설정</button>
+    </div>
+    <div class="sample">
+        <textarea name="" id="" cols="30" rows="1" class="input-textarea"></textarea>
+    </div>
+</div>
+
+<script type="text/javascript" src="../vendor/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+
+<script type="text/javascript">
+    var a = $('.input-textarea').expandArea();
+
+    $('.reset').on('click', function(){
+        a.data().expandArea.options.line = $('input').val();
+    });
+</script>
+
+</body>
+</html>
