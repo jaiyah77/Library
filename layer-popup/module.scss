@@ -1,0 +1,13 @@
+.layer{
+	display:none;
+	border:1px solid #ccc;
+	padding:10px;
+
+	.layer-section &{
+		display:block;
+	}
+
+	&.on{
+		display:block;
+	}
+}

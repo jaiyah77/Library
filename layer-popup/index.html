@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>layer popup</title>
+	<link rel="stylesheet" href="module.css">
+</head>
+<body>
+
+<a href="#layer-01" title="레이어 열림" data-layer-open="false" data-target="#layer-01">레이어1 열기</a>
+<a href="#layer-02" title="레이어 열림" data-layer-open="false">레이어2 열기</a>
+
+
+<div id="layer-section">
+	<div id="layer-01" class="layer" tabindex="0" data-focus-id="layer-01" data-focus-prev="btn-close-01">
+		<p>레이어 1번 <a href="#">sect elit. Dicta, inventore</a> inventore.</p>
+		<a href="#" class="btn-layer-close" data-focus-id="btn-close-01" data-focus-next="layer-01">닫기</a>
+	</div>
+
+	<div id="layer-02" class="layer" tabindex="0">
+		<p>레이어 2번 <a href="#">sect elit. Dicta, inventore</a> inventore.</p>
+		<a href="#layer-03" title="레이어 열림" data-layer-open="false">레이어3 열기</a>
+		<a href="#" class="btn-layer-close">닫기</a>
+	</div>
+
+	<div id="layer-03" class="layer" tabindex="0" data-focus-id="layer-03" data-focus-prev="btn-close-03">
+		<p>레이어 3번 <a href="#">sect elit. Dicta, inventore</a> inventore.</p>
+		<a href="#" class="btn-layer-close" data-focus-id="btn-close-03" data-focus-next="layer-03">닫기</a>
+	</div>
+</div>
+
+<script src="../../common/vendor/jquery-1.11.2.min.js"></script>
+<script src="../common.js"></script>
+<script src="page.js"></script>
+</body>
+</html>
