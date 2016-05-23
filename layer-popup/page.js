@@ -1,11 +1,11 @@
 /**
- * Created by demoon KYUNGTAE
+ * Created by demoon
  */
 
 $(document).ready(function (){
 	$.ajax({
 		url: "sample.html"
 	}).done(function (html){
-		//msminsu.layerPopup.open(html);
+		//demoon.layerPopup.open(html);
 	});
 });

@@ -51,13 +51,13 @@
 		font-weight:300;
 	}
 	@if ($bold == 3){
-		font-weight:normal;
+		font-weight:400;
 	}
 	@if ($bold == 4){
 		font-weight:500;
 	}
 	@if ($bold == 5){
-		font-weight:bold;
+		font-weight:700;
 	}
 	@if ($bold == 6){
 		font-weight:900;

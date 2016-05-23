@@ -1,6 +1,10 @@
-// 접근성 관련 포커스 강제 이동
-function accessibilityFocus(){
-	$(document).on('keydown', '[data-focus-prev], [data-focus-next]', function (e){
+/**
+ * Created by MOON KYUNG TAE
+ * 접근성 관련 포커스 강제 이동
+ */
+
+demoon.accessibilityFocus = (function ($) {
+	$(document).on('keydown', '[data-focus-prev], [data-focus-next]', function (e) {
 		var next = $(e.target).attr('data-focus-next'),
 			prev = $(e.target).attr('data-focus-prev'),
 			target = next || prev || false;
@@ -14,6 +18,4 @@ function accessibilityFocus(){
 			$('[data-focus="' + target + '"]').focus();
 		}
 	});
-}
-
-accessibilityFocus();
+}(window.jQuery));
