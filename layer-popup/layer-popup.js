@@ -39,7 +39,9 @@ demoon.layerPopup = (function ($) {
 			return;
 		}
 
-		layerSection.append(layerDataStore[showId]);
+		layerSection.append(layerDataStore[showId])
+			.addClass('active');
+
 		$(layerDataStore[showId]).addClass('on').focus();
 
 		openList.add(showId);
@@ -50,6 +52,8 @@ demoon.layerPopup = (function ($) {
 		hideID = hideID || "#" + $(this).parent().attr('id');
 		openList.remove(hideID);
 		$(hideID).remove();
+
+		layerSection.removeClass('active');
 
 		if(e){
 			e.preventDefault();
