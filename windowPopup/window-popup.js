@@ -11,8 +11,8 @@ demoon.windowPopup = (function ($) {
 	function open(e) {
 		e.preventDefault();
 		var url = $(this).attr('href'),
-			specs = $(this).attr('data-window-open'),
-			name = $(this).attr('data-window-name') ? $(this).attr('data-window-name') : false;
+			specs = $(this).attr('data-ui-window-open'),
+			name = $(this).attr('data-ui-window-name') ? $(this).attr('data-ui-window-name') : false;
 
 		if(name){
 			open.data[name] = window.open(url, '_blank', specs);
@@ -28,7 +28,7 @@ demoon.windowPopup = (function ($) {
 		delete open.data[value];
 	}
 
-	$(document).on('click.demoon.windowOpen', '[data-window-open]', open);
+	$(document).on('click.demoon.windowOpen', '[data-ui-window-open]', open);
 
 	return {
 		open: open,

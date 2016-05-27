@@ -4,6 +4,13 @@
 	display:none;
 	border:1px solid #ccc;
 	padding:10px;
+	background:#fff;
+	position:absolute;
+	top:50%;
+	left:50%;
+	width:500px;
+	min-height:300px;
+	transform:translateX(-50%) translateY(-50%);
 
 	.layer-section &{
 		display:block;
@@ -22,3 +29,6 @@
 	left:0;
 	right:0;
 }
+
+
+.btn.close{ position:absolute; right:15px; top:15px;}

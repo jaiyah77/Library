@@ -1,3 +1,9 @@
+var demoon = demoon || {};
+
+demoon.slide = function (){
+
+};
+
 function adviceBanner(container, options) {
 	if(!container.length) {
 		return;
@@ -105,14 +111,21 @@ function adviceBanner(container, options) {
 	}
 
 	init();
-	detect.tabBtnListItem.find('a').on('click.adviceBanner', function(e) {
+	
+	$(document).on("click.demoon.slide", ".slide container a", function (){
+		
+	});
+	
+	detect.tabBtnListItem.find('a').on('click.slide', function(e) {
 		e.preventDefault();
 		slide($(this).data('idx'));
 	});
 
+
+	$(document).on('click', 'data-ui-slide .controller .btn')
 }
 
 $(document).ready(function(){
-	adviceBanner($('.advice-product'));
+	adviceBanner($('.slide'));
 });
 

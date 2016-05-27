@@ -1,11 +1,15 @@
 /**
- * Created by demoon
+ * Created by MOON KYUNG TAE
  */
 
-$(document).ready(function (){
+function init(){
 	$.ajax({
 		url: "sample.html"
 	}).done(function (html){
-		//demoon.layerPopup.open(html);
+		demoon.layerPopup.open(html);
 	});
+}
+
+$(document).ready(function (){
+	// init();
 });

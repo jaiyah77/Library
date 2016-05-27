@@ -4,9 +4,9 @@
  */
 
 demoon.accessibilityFocus = (function ($) {
-	$(document).on('keydown', '[data-focus-prev], [data-focus-next]', function (e) {
-		var next = $(e.target).attr('data-focus-next'),
-			prev = $(e.target).attr('data-focus-prev'),
+	$(document).on('keydown', '[data-ui-focus-prev], [data-ui-focus-next]', function (e) {
+		var next = $(e.target).attr('data-ui-focus-next'),
+			prev = $(e.target).attr('data-ui-focus-prev'),
 			target = next || prev || false;
 		
 		if(!target || e.keyCode != 9){
@@ -15,7 +15,7 @@ demoon.accessibilityFocus = (function ($) {
 		
 		if((!e.shiftKey && !!next) || (e.shiftKey && !!prev)){
 			e.preventDefault();
-			$('[data-focus="' + target + '"]').focus();
+			$('[data-ui-focus-id="' + target + '"]').focus();
 		}
 	});
 }(window.jQuery));
