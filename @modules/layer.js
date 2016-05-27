@@ -1,7 +1,9 @@
 /**
  * Created by MOON KYUNG TAE
  * layer popup
+ * @type {{open, close}}
  */
+
 demoon.layerPopup = (function ($){
 	var layerSection = $('#layer-section');
 	if(layerSection.length < 1){

@@ -2,7 +2,6 @@
  * Created by MOON KYUNG TAE
  * 접근성 관련 포커스 강제 이동
  */
-
 demoon.accessibilityFocus = (function ($) {
 	$(document).on('keydown', '[data-ui-focus-prev], [data-ui-focus-next]', function (e) {
 		var next = $(e.target).attr('data-ui-focus-next'),
