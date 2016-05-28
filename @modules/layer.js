@@ -25,6 +25,7 @@ demoon.layerPopup = (function ($){
 	
 	function isOpen(){
 		return layerSection.find('.layer').length > 0;
+
 	}
 	
 	function close(hideId){
@@ -62,7 +63,7 @@ demoon.layerPopup = (function ($){
 		if(!isOpen()){
 			layerSection.removeClass('active');
 		}
-		
+
 		if(e){
 			e.preventDefault();
 			openHistory.get().focus();
@@ -84,6 +85,7 @@ demoon.layerPopup = (function ($){
 	});
 	
 	$(document).on('click.demoon.layerPopup', '[data-ui-layer-open]', showLayer);
+	
 	$(document).on('click.demoon.layerPopup', '.btn-layer-close', hideLayer);
 	
 	initOpen();
