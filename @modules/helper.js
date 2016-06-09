@@ -1,17 +1,17 @@
 /**
  * Created by MOON KYUNGTAE
  */
-var demoon = {};
 
-demoon.helper = (function ($){
+function helper(){
+	// get button target
 	function getBtnTarget(t){
 		return $(t).attr('data-target') ? $(t).attr('data-target') : t.hash;
 	}
 	
+	//stack
 	function Stack(){
 		this.dataStore = [];
 	}
-	
 	Stack.prototype = {
 		add: function (data){
 			this.dataStore.push(data);
@@ -21,10 +21,11 @@ demoon.helper = (function ($){
 		}
 	};
 	
+	
+	// list
 	function List(){
 		this.dataStore = [];
 	}
-	
 	List.prototype = {
 		add: function (data){
 			this.dataStore.push(data);
@@ -52,4 +53,4 @@ demoon.helper = (function ($){
 		List: List,
 		getBtnTarget: getBtnTarget
 	}
-}(window.jQuery));
+}

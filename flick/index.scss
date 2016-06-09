@@ -1,0 +1,7 @@
+@import "../@common/css/_reset";
+.flick{ overflow:hidden; }
+.flick-wrap{ white-space:nowrap; font-size:0; }
+.flick-item{ width:100%; height:300px; display:inline-block; font-size:12px; }
+.flick-item:nth-child(1){ background:#000; }
+.flick-item:nth-child(2){ background:#f00; }
+.flick-item:nth-child(3){ background:#00a9e2; }
