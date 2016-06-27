@@ -1,78 +1,111 @@
-function slide(){
-	var detect = {};
-	
+function slide(container, options){
+	if(!container.length){
+		return;
+	}
+
+	var detect = {},
+		config = {start: 0};
+
+	$.extend(config, options);
+
 	function init(){
-		
+		detect.item = container.find(config.item);
+		detect.min = 0;
+		detect.max = detect.item.size();
+		detect.width = container.width();
+		detect.current = config.start;
+
+		if(config.auto){
+			auto();
+		}
+
+		detect.item.eq(detect.current).addClass('active').css({'left': 0});
+
+		$(document).on('click', '[data-ctrl="prev"]', function (e){
+			e.preventDefault();
+			prev();
+		});
+		$(document).on('click', '[data-ctrl="next"]', function (e){
+			e.preventDefault();
+			next();
+		});
 	}
-	
-	function setup(){
-		
+
+	function resize(){
+
 	}
-	
-	function up(){
-		if(detect.current + 1 > detect.max){
+
+	function next(){
+		if(detect.current + 1 >= detect.max){
 			return;
 		}
+
 		slide(detect.current + 1);
 	}
-	
-	function down(){
+
+	function prev(){
 		if(detect.current - 1 < detect.min){
 			return;
 		}
+
 		slide(detect.current - 1);
 	}
-	
+
+	function auto(){
+		// setInterval(next, 1000);
+	}
+
 	function direction(num){
-		return detect.current > num ? 'up' : 'down';
+		return detect.current > num ? 'right' : 'left';
 	}
-	
-	function slideEnd(index){
-		
-	}
-	
+
 	function slide(index, speed){
-		if((index == detect.current) || (index > detect.max)){
+		if(detect.item.is(':animated')){
 			return;
 		}
-		
-		if(detect.viewListItem.is(':animated')){
-			return;
-		}
-		
+
 		var to = direction(index),
 			value;
-		
-		speed = speed == 0 ? 0 : 400;
-		
+
+		speed = speed == 0 ? 0 : 500;
+
 		switch (to) {
-			case 'down' :
-				value = -detect.height;
+			case 'left' :
+				value = detect.width;
 				break;
-			
-			case 'up' :
-				value = detect.height;
+
+			case 'right' :
+				value = -detect.width;
 				break;
-			
 		}
-		
-		detect.viewListItem.eq(index).css({'top': -value}, speed).addClass('active');
-		detect.viewListItem.eq(index).animate({'top': 0}, speed);
-		
-		detect.viewListItem.eq(detect.current).animate({'top': value}, speed, function (){
-			slideEnd(index);
+
+		detect.item.eq(index).addClass('active').css({'left': value});
+		detect.item.eq(index).animate({'left': 0}, speed);
+		detect.item.eq(detect.current).animate({'left': -value}, speed, function (){
+			detect.item.eq(detect.current).removeClass('active');
+			detect.current = index;
+			slideEnd();
 		});
-		
 	}
-	
+
+	function slideEnd(){
+		console.log('callback');
+	}
+
 	init();
-	
-	$(document).on('click', 'data-ui-slide .controller .btn', function (e){
-		e.preventDefault();
-		slide($(this).data('idx'));
-	});
 
 	return {
-
-	};
+		init: init,
+		slide: slide,
+		prev: prev,
+		next: next,
+		slideEnd: slideEnd
+	}
 }
+
+$(document).ready(function (){
+	slide($('.slide'), {
+		item: '.item',
+		auto: true
+	});
+});

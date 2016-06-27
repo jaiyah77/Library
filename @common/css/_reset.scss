@@ -39,5 +39,5 @@ caption{ visibility:hidden; width:0; height:0; overflow:hidden; font-size:0; }
 }
 .line{ border-top:1px solid #ccc; margin:20px 0; }
 .guide-tit{ background:#eee; border-bottom:1px solid #ccc; text-align:center; padding:10px; }
-.btn{ display:inline-block; border-radius:5px; padding:5px 10px; border:1px solid #ccc; margin:0 2px; background:#fff;}
+.btn{ display:inline-block; font-size:inherit; border-radius:5px; padding:5px 10px; border:1px solid #ccc; margin:0 2px; background:#fff; line-height:1; vertical-align:middle;}
 .btn-wrap{margin:10px -2px;}
