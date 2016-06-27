@@ -3,12 +3,10 @@
  */
 
 function helper(){
-	// get button target
 	function getBtnTarget(t){
 		return $(t).attr('data-target') ? $(t).attr('data-target') : t.hash;
 	}
 	
-	//stack
 	function Stack(){
 		this.dataStore = [];
 	}
@@ -21,8 +19,6 @@ function helper(){
 		}
 	};
 	
-	
-	// list
 	function List(){
 		this.dataStore = [];
 	}
