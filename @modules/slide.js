@@ -2,25 +2,25 @@ function slide(container, options){
 	if(!container.length){
 		return;
 	}
-
+	
 	var detect = {},
 		config = {start: 0};
-
+	
 	$.extend(config, options);
-
+	
 	function init(){
 		detect.item = container.find(config.item);
 		detect.min = 0;
-		detect.max = detect.item.length;
+		detect.max = detect.item.length - 1;
 		detect.width = container.width();
 		detect.current = config.start;
-
+		
 		if(config.auto){
 			auto();
 		}
-
+		
 		detect.item.eq(detect.current).addClass('active').css({'left': 0});
-
+		
 		$(document).on('click', '[data-ctrl="prev"]', function (e){
 			e.preventDefault();
 			prev();
@@ -30,78 +30,62 @@ function slide(container, options){
 			next();
 		});
 	}
-
+	
 	function resize(){
-
+		
 	}
-
+	
 	function next(){
-		var nextIndex;
-
-		if(detect.current + 1 >= detect.max){
-			nextIndex = detect.min;
-		} else {
-			nextIndex = detect.current + 1;
-		}
-
-		console.log(nextIndex);
-		detect.current = nextIndex;
-		slide(nextIndex);
+		slide(detect.current == detect.max ? detect.min : detect.current + 1);
 	}
-
+	
 	function prev(){
-		if(detect.current - 1 <= detect.min){
-			detect.current = detect.max;
-		}
-
-		slide(detect.current - 1);
+		slide(detect.current == detect.min ? detect.max : detect.current - 1);
 	}
-
+	
 	function auto(){
-		setInterval(next, 1000);
+		// setInterval(next, 1000);
 	}
-
+	
 	function direction(num){
 		return detect.current > num ? 'right' : 'left';
 	}
-
+	
 	function slide(index, speed){
 		if(detect.item.is(':animated')){
 			return;
 		}
-
+		
 		var to = direction(index),
 			value;
-
+		
 		speed = speed == 0 ? 0 : 500;
-
+		
 		switch (to) {
 			case 'left' :
 				value = detect.width;
 				break;
-
+			
 			case 'right' :
 				value = -detect.width;
 				break;
 		}
-
-		console.log(index, detect.current);
-
+		
 		detect.item.eq(index).addClass('active').css({'left': value});
 		detect.item.eq(index).animate({'left': 0}, speed);
-		detect.item.eq(detect.current).animate({'left': -value}, speed, function (){
-			detect.item.eq(detect.current).removeClass('active');
+		
+		detect.item.eq(detect.current).addClass('active').animate({'left': -value}, speed, function (){
 			detect.current = index;
 			slideEnd();
 		});
 	}
-
+	
 	function slideEnd(){
 		console.log('callback');
 	}
-
+	
 	init();
-
+	
 	return {
 		init: init,
 		slide: slide,
@@ -114,6 +98,6 @@ function slide(container, options){
 $(document).ready(function (){
 	slide($('.slide'), {
 		item: '.item',
-		// auto: true
+		auto: true
 	});
 });
