@@ -25,23 +25,23 @@ function slide(container, options) {
 			.on('click', '[data-ctrl="prev"], [data-slide], [data-ctrl="prev"], [data-ctrl="next"], [data-ctrl="play"], [data-ctrl="stop"]', function (e) {
 				e.preventDefault();
 			})
-			.on('click', '[data-slide]', function (e) {
+			.on('click', '[data-slide]', function () {
 				var index = $(this).attr('data-slide');
 				if(detect.current == index){
 					return;
 				}
 				slide(index);
 			})
-			.on('click', '[data-ctrl="prev"]', function (e) {
+			.on('click', '[data-ctrl="prev"]', function () {
 				prev();
 			})
-			.on('click', '[data-ctrl="next"]', function (e) {
+			.on('click', '[data-ctrl="next"]', function () {
 				next();
 			})
-			.on('click', '[data-ctrl="play"]', function (e) {
+			.on('click', '[data-ctrl="play"]', function () {
 				auto();
 			})
-			.on('click', '[data-ctrl="stop"]', function (e) {
+			.on('click', '[data-ctrl="stop"]', function () {
 				stop();
 			});
 
@@ -122,7 +122,7 @@ function slide(container, options) {
 }
 
 $(document).ready(function () {
-	slide($('.slide'), {
+	slide($('.slide-1'), {
 		item: '.item'
 	});
 });
