@@ -22,29 +22,26 @@ function slide(container, options) {
 		detect.item.eq(detect.current).addClass('active');
 		
 		$(document)
-			.on('click', '[data-slide]', function (e) {
+			.on('click', '[data-ctrl="prev"], [data-slide], [data-ctrl="prev"], [data-ctrl="next"], [data-ctrl="play"], [data-ctrl="stop"]', function (e) {
 				e.preventDefault();
-				var index  = $(this).attr('data-slide');
-
+			})
+			.on('click', '[data-slide]', function (e) {
+				var index = $(this).attr('data-slide');
 				if(detect.current == index){
 					return;
 				}
 				slide(index);
 			})
 			.on('click', '[data-ctrl="prev"]', function (e) {
-				e.preventDefault();
 				prev();
 			})
 			.on('click', '[data-ctrl="next"]', function (e) {
-				e.preventDefault();
 				next();
 			})
 			.on('click', '[data-ctrl="play"]', function (e) {
-				e.preventDefault();
 				auto();
 			})
 			.on('click', '[data-ctrl="stop"]', function (e) {
-				e.preventDefault();
 				stop();
 			});
 
