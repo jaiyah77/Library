@@ -24,7 +24,12 @@ function slide(container, options) {
 		$(document)
 			.on('click', '[data-slide]', function (e) {
 				e.preventDefault();
-				slide($(this).attr('data-slide'));
+				var index  = $(this).attr('data-slide');
+
+				if(detect.current == index){
+					return;
+				}
+				slide(index);
 			})
 			.on('click', '[data-ctrl="prev"]', function (e) {
 				e.preventDefault();
@@ -51,11 +56,11 @@ function slide(container, options) {
 	}
 	
 	function next() {
-		slide(detect.current == detect.max ? detect.min : detect.current + 1);
+		slide(detect.current == detect.max ? detect.min : +detect.current + 1, 'left');
 	}
 	
 	function prev() {
-		slide(detect.current == detect.min ? detect.max : detect.current - 1);
+		slide(detect.current == detect.min ? detect.max : +detect.current - 1, 'right');
 	}
 	
 	function auto() {
@@ -66,20 +71,24 @@ function slide(container, options) {
 		clearInterval(detect.isPlay);
 	}
 	
-	function direction(num) {
+	function direction(num, dir) {
+		if(dir){
+			return dir;
+		}
 		return detect.current > num ? 'right' : 'left';
 	}
 	
-	function slide(index, speed) {
+	function slide(index, dir) {
+		console.log(index, dir);
+
 		if(detect.item.is(':animated')){
 			return;
 		}
 		
-		var to = direction(index),
-			value;
-		
-		speed = speed == 0 ? 0 : 500;
-		
+		var to = direction(index, dir),
+			value,
+			speed = 500;
+
 		switch (to) {
 			case 'left' :
 				value = detect.width;
