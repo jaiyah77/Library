@@ -19,9 +19,13 @@ function slide(container, options) {
 			auto();
 		}
 		
-		detect.item.eq(detect.current).addClass('active').css({'left': 0});
+		detect.item.eq(detect.current).addClass('active');
 		
 		$(document)
+			.on('click', '[data-slide]', function (e) {
+				e.preventDefault();
+				slide($(this).attr('data-slide'));
+			})
 			.on('click', '[data-ctrl="prev"]', function (e) {
 				e.preventDefault();
 				prev();
