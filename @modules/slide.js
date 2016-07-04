@@ -1,127 +1,121 @@
-function slide(container, options) {
+function slide(container, options){
+
 	if(!container.length){
 		return;
 	}
-	
-	var detect = {isPlay: false},
-		config = {start: 0};
-	
+
+	var detect = {
+			isPlay: false,
+			transitions: (function (){
+				var props = ['transitionProperty', 'WebkitTransition', 'MozTransition', 'OTransition', 'msTransition'];
+				for (var i in props) {
+					if($('body')[0].style.hasOwnProperty(props[i])){
+						return true;
+					}
+
+				}
+				return false;
+			}())
+		},
+		config = {start: 0, auto: false},
+		dirValue = {
+			'left': 100,
+			'right': -100,
+			'up': 100,
+			'down': -100
+		};
+
 	$.extend(config, options);
-	
-	function init() {
+
+	console.log(detect.transitions);
+
+	function init(){
 		detect.item = container.find(config.item);
 		detect.min = 0;
 		detect.max = detect.item.length - 1;
 		detect.current = config.start;
-		detectSize();
-		
+		detect.item.eq(detect.current).addClass('active');
+
 		if(config.auto){
 			auto();
 		}
-		
-		detect.item.eq(detect.current).addClass('active');
-		
+
 		$(document)
-			.on('click', '[data-ctrl="prev"], [data-slide], [data-ctrl="prev"], [data-ctrl="next"], [data-ctrl="play"], [data-ctrl="stop"]', function (e) {
+			.on('click', '[data-ctrl="prev"], [data-slide], [data-ctrl="prev"], [data-ctrl="next"], [data-ctrl="play"], [data-ctrl="stop"]', function (e){
 				e.preventDefault();
 			})
-			.on('click', '[data-slide]', function () {
+			.on('click', '[data-slide]', function (){
 				var index = $(this).attr('data-slide');
 				if(detect.current == index){
 					return;
 				}
-				slide(index);
+				slideTo(index);
 			})
-			.on('click', '[data-ctrl="prev"]', function () {
-				prev();
-			})
-			.on('click', '[data-ctrl="next"]', function () {
-				next();
-			})
-			.on('click', '[data-ctrl="play"]', function () {
-				auto();
-			})
-			.on('click', '[data-ctrl="stop"]', function () {
-				stop();
-			});
+			.on('click', '[data-ctrl="prev"]', prev)
+			.on('click', '[data-ctrl="next"]', next)
+			.on('click', '[data-ctrl="play"]', auto)
+			.on('click', '[data-ctrl="stop"]', stop);
 
-		$(window).on('resize', detectSize);
 	}
 
-	function detectSize() {
-		detect.width = container.width();
+	function next(){
+		slideTo(detect.current == detect.max ? detect.min : +detect.current + 1, 'left');
 	}
-	
-	function next() {
-		slide(detect.current == detect.max ? detect.min : +detect.current + 1, 'left');
+
+	function prev(){
+		slideTo(detect.current == detect.min ? detect.max : +detect.current - 1, 'right');
 	}
-	
-	function prev() {
-		slide(detect.current == detect.min ? detect.max : +detect.current - 1, 'right');
-	}
-	
-	function auto() {
+
+	function auto(){
 		detect.isPlay = setInterval(next, 1000);
 	}
 
-	function stop() {
+	function stop(){
 		clearInterval(detect.isPlay);
 	}
-	
-	function direction(num, dir) {
+
+	function direction(num, dir){
 		if(dir){
 			return dir;
 		}
+
 		return detect.current > num ? 'right' : 'left';
 	}
-	
-	function slide(index, dir) {
-		console.log(index, dir);
 
+	function slideTo(index, dir){
 		if(detect.item.is(':animated')){
 			return;
 		}
-		
+
 		var to = direction(index, dir),
-			value,
 			speed = 500;
 
-		switch (to) {
-			case 'left' :
-				value = detect.width;
-				break;
-			
-			case 'right' :
-				value = -detect.width;
-				break;
-		}
-		
-		detect.item.eq(index).addClass('active').css({'left': value});
+		detect.item.eq(index).addClass('active').css({'left': dirValue[to] + '%'});
 		detect.item.eq(index).animate({'left': 0}, speed);
-		
-		detect.item.eq(detect.current).animate({'left': -value}, speed, function () {
+		detect.item.eq(detect.current).animate({'left': -dirValue[to] + '%'}, speed, function (){
 			$(this).removeClass('active');
 			detect.current = index;
 			slideEnd();
 		});
 	}
-	
-	function slideEnd() {
+
+	function slideEnd(){
 		console.log('callback');
 	}
-	
+
 	init();
-	
+
 	return {
 		init: init,
-		slide: slide,
+		slide: slideTo,
 		prev: prev,
 		next: next,
-		slideEnd: slideEnd
+		stop: stop,
+		auto: auto
 	}
 }
 
-$(document).ready(function () {
+$(document).ready(function (){
 	slide($('.slide-1'), {
 		item: '.item'
 	});
