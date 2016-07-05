@@ -72,7 +72,7 @@
 
 				for(var i = 0, max = vendors.length; i < max; i++){
 					if(vendors[i] in document.createElement('div').style){
-						return vendors[i].substr(0, vendors[i].length - 90);
+						return vendors[i].substr(0, vendors[i].length - 9);
 					}
 				}
 				return false;

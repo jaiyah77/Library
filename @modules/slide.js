@@ -6,13 +6,12 @@ function slide(container, options){
 
 	var detect = {
 			isPlay: false,
-			transitions: (function (){
-				var props = ['transitionProperty', 'WebkitTransition', 'MozTransition', 'OTransition', 'msTransition'];
-				for (var i in props) {
-					if($('body')[0].style.hasOwnProperty(props[i])){
-						return true;
+			transform: (function (){
+				var props = ['transform', 'webkitTransform', 'MozTransform', 'OTransform', 'msTransform'];
+				for (var i = 0, max = props.length; i < max; i++) {
+					if(props[i] in $('body')[0].style){
+						return props[i];
 					}
-
 				}
 				return false;
 			}())
@@ -26,9 +25,9 @@ function slide(container, options){
 		};
 
 	$.extend(config, options);
-
-	console.log(detect.transitions);
-
+	
+	console.log(detect.transform);
+	
 	function init(){
 		detect.item = container.find(config.item);
 		detect.min = 0;
@@ -90,13 +89,24 @@ function slide(container, options){
 		var to = direction(index, dir),
 			speed = 500;
 
-		detect.item.eq(index).addClass('active').css({'left': dirValue[to] + '%'});
-		detect.item.eq(index).animate({'left': 0}, speed);
-		detect.item.eq(detect.current).animate({'left': -dirValue[to] + '%'}, speed, function (){
-			$(this).removeClass('active');
-			detect.current = index;
-			slideEnd();
-		});
+		if(detect.transform){
+			detect.item.eq(index).addClass('active').css(detect.transform, 'translate3d(' + dirValue[to] + '%, 0, 0)');
+			detect.item.eq(index).css('transitionDuration', 500 + "ms");
+
+			setTimeout(function (){
+				detect.item.eq(index).css('webkitTransform', 'translate3d(' + 0 + '%, 0, 0)');
+				detect.item.eq(index).css('webkitTransform', 'translate3d(' + 0 + '%, 0, 0)');
+			}, 10);
+
+		} else {
+			detect.item.eq(index).addClass('active').css({'left': dirValue[to] + '%'});
+			detect.item.eq(index).animate({'left': 0}, speed);
+			detect.item.eq(detect.current).animate({'left': -dirValue[to] + '%'}, speed, function (){
+				$(this).removeClass('active');
+				detect.current = index;
+				slideEnd();
+			});
+		}
 	}
 
 	function slideEnd(){
