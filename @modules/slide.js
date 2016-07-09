@@ -1,20 +1,16 @@
-function slide(container, options){
+/**
+ * Created by MOON KYUNGTAE
+ */
 
+function slide(container, options){
 	if(!container.length){
 		return;
 	}
 
 	var detect = {
 			isPlay: false,
-			transform: (function (){
-				var props = ['transform', 'webkitTransform', 'MozTransform', 'OTransform', 'msTransform'];
-				for (var i = 0, max = props.length; i < max; i++) {
-					if(props[i] in $('body')[0].style){
-						return props[i];
-					}
-				}
-				return false;
-			}())
+			style: {},
+			isInTransition: false
 		},
 		config = {start: 0, auto: false},
 		dirValue = {
@@ -23,17 +19,10 @@ function slide(container, options){
 			'up': 100,
 			'down': -100
 		};
-
 	$.extend(config, options);
-	
-	console.log(detect.transform);
-	
+
 	function init(){
-		detect.item = container.find(config.item);
-		detect.min = 0;
-		detect.max = detect.item.length - 1;
-		detect.current = config.start;
-		detect.item.eq(detect.current).addClass('active');
+		setup();
 
 		if(config.auto){
 			auto();
@@ -54,7 +43,18 @@ function slide(container, options){
 			.on('click', '[data-ctrl="next"]', next)
 			.on('click', '[data-ctrl="play"]', auto)
 			.on('click', '[data-ctrl="stop"]', stop);
+	}
 
+	function setup(){
+		detect.item = container.find(config.item);
+		detect.min = 0;
+		detect.max = detect.item.length - 1;
+		detect.current = config.start;
+		detect.item.eq(detect.current).addClass('active');
+
+		detect.transform = detect.style['transform'] = demoon.helper.hasProperty('transform');
+		detect.style['transitionTimingFunction'] = demoon.helper.hasProperty('transitionTimingFunction');
+		detect.style['transitionDuration'] = demoon.helper.hasProperty('transitionDuration');
 	}
 
 	function next(){
@@ -90,13 +90,29 @@ function slide(container, options){
 			speed = 500;
 
 		if(detect.transform){
-			detect.item.eq(index).addClass('active').css(detect.transform, 'translate3d(' + dirValue[to] + '%, 0, 0)');
-			detect.item.eq(index).css('transitionDuration', 500 + "ms");
+			if(detect.isInTransition){
+				return;
+			}
+			detect.isInTransition = true;
+
+			detect.item.eq(detect.current).css(detect.style.transitionDuration, speed + "ms");
+			detect.item.eq(index).css(detect.style.transitionDuration, speed + "ms");
+			detect.item.eq(detect.current).css(detect.style.transitionTimingFunction, 'cubic-bezier(0.1, 0.54, 0, 1.01)');
+			detect.item.eq(index).css(detect.style.transitionTimingFunction, 'cubic-bezier(0.1, 0.54, 0, 1.01)');
+			detect.item.eq(index).addClass('active').css(detect.style.transform, 'translate3d(' + dirValue[to] + '%, 0, 0)');
 
 			setTimeout(function (){
-				detect.item.eq(index).css('webkitTransform', 'translate3d(' + 0 + '%, 0, 0)');
-				detect.item.eq(index).css('webkitTransform', 'translate3d(' + 0 + '%, 0, 0)');
+
+				detect.item.eq(index).css(detect.style.transform, 'translate3d(' + 0 + '%, 0, 0)');
+				detect.item.eq(detect.current).css(detect.style.transform, 'translate3d(' + -dirValue[to] + '%, 0, 0)');
 			}, 10);
+
+			detect.item.eq(detect.current).one('transitionend', function (){
+				$(this).removeClass('active');
+				detect.current = index;
+				slideEnd();
+				detect.isInTransition = false;
+			});
 
 		} else {
 			detect.item.eq(index).addClass('active').css({'left': dirValue[to] + '%'});

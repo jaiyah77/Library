@@ -2,7 +2,9 @@
  * Created by MOON KYUNGTAE
  */
 
-function helper(){
+var demoon = demoon || {};
+
+demoon.helper = (function ($){
 	function getBtnTarget(t){
 		return $(t).attr('data-target') ? $(t).attr('data-target') : t.hash;
 	}
@@ -10,6 +12,7 @@ function helper(){
 	function Stack(){
 		this.dataStore = [];
 	}
+	
 	Stack.prototype = {
 		add: function (data){
 			this.dataStore.push(data);
@@ -22,6 +25,7 @@ function helper(){
 	function List(){
 		this.dataStore = [];
 	}
+	
 	List.prototype = {
 		add: function (data){
 			this.dataStore.push(data);
@@ -44,9 +48,32 @@ function helper(){
 		}
 	};
 	
+	function setPrefix(vendor, style){
+		if(vendor === false){
+			return false;
+		}
+		if(vendor === ''){
+			return style;
+		}
+		return vendor + style.charAt(0).toUpperCase() + style.substr(1);
+	}
+	
+	function hasProperty(style){
+		var upper = style.charAt(0).toUpperCase() + style.substr(1);
+		var props = [style, 'webkit' + upper, 'Moz' + upper, 'O' + upper, 'ms' + upper];
+		for (var i = 0; i < 5; i++) {
+			if(props[i] in $('body')[0].style){
+				return props[i];
+			}
+		}
+		return false;
+	}
+	
 	return {
 		Stack: Stack,
 		List: List,
-		getBtnTarget: getBtnTarget
+		getBtnTarget: getBtnTarget,
+		setPrefix: setPrefix,
+		hasProperty: hasProperty
 	}
-}
+}(window.jQuery));
