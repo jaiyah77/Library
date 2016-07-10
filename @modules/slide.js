@@ -7,18 +7,10 @@ function slide(container, options){
 		return;
 	}
 
-	var detect = {
-			isPlay: false,
-			style: {},
-			isInTransition: false
-		},
-		config = {start: 0, auto: false},
-		dirValue = {
-			'left': 100,
-			'right': -100,
-			'up': 100,
-			'down': -100
-		};
+	var detect = {isPlay: false, style: {}, isInTransition: false};
+	var config = {start: 0, auto: false};
+	var dirValue = {'left': 100, 'right': -100};
+
 	$.extend(config, options);
 
 	function init(){
@@ -87,23 +79,24 @@ function slide(container, options){
 		}
 
 		var to = direction(index, dir),
-			speed = 500;
+			speed = 500,
+			func = 'cubic-bezier(0.1, 0.54, 0, 1.01)';
 
 		if(detect.transform){
 			if(detect.isInTransition){
 				return;
 			}
+
 			detect.isInTransition = true;
 
 			detect.item.eq(detect.current).css(detect.style.transitionDuration, speed + "ms");
 			detect.item.eq(index).css(detect.style.transitionDuration, speed + "ms");
-			detect.item.eq(detect.current).css(detect.style.transitionTimingFunction, 'cubic-bezier(0.1, 0.54, 0, 1.01)');
-			detect.item.eq(index).css(detect.style.transitionTimingFunction, 'cubic-bezier(0.1, 0.54, 0, 1.01)');
-			detect.item.eq(index).addClass('active').css(detect.style.transform, 'translate3d(' + dirValue[to] + '%, 0, 0)');
+			detect.item.eq(detect.current).css(detect.style.transitionTimingFunction, func);
+			detect.item.eq(index).css(detect.style.transitionTimingFunction, func);
+			detect.item.eq(index).css(detect.style.transform, 'translate3d(' + dirValue[to] + '%, 0, 0)').addClass('active');
 
 			setTimeout(function (){
-
-				detect.item.eq(index).css(detect.style.transform, 'translate3d(' + 0 + '%, 0, 0)');
+				detect.item.eq(index).css(detect.style.transform, 'translate3d( 0, 0, 0)');
 				detect.item.eq(detect.current).css(detect.style.transform, 'translate3d(' + -dirValue[to] + '%, 0, 0)');
 			}, 10);
 
@@ -115,6 +108,7 @@ function slide(container, options){
 			});
 
 		} else {
+
 			detect.item.eq(index).addClass('active').css({'left': dirValue[to] + '%'});
 			detect.item.eq(index).animate({'left': 0}, speed);
 			detect.item.eq(detect.current).animate({'left': -dirValue[to] + '%'}, speed, function (){

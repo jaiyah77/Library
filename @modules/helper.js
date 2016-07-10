@@ -48,19 +48,10 @@ demoon.helper = (function ($){
 		}
 	};
 	
-	function setPrefix(vendor, style){
-		if(vendor === false){
-			return false;
-		}
-		if(vendor === ''){
-			return style;
-		}
-		return vendor + style.charAt(0).toUpperCase() + style.substr(1);
-	}
-	
 	function hasProperty(style){
 		var upper = style.charAt(0).toUpperCase() + style.substr(1);
 		var props = [style, 'webkit' + upper, 'Moz' + upper, 'O' + upper, 'ms' + upper];
+
 		for (var i = 0; i < 5; i++) {
 			if(props[i] in $('body')[0].style){
 				return props[i];
@@ -73,7 +64,6 @@ demoon.helper = (function ($){
 		Stack: Stack,
 		List: List,
 		getBtnTarget: getBtnTarget,
-		setPrefix: setPrefix,
 		hasProperty: hasProperty
 	}
 }(window.jQuery));
