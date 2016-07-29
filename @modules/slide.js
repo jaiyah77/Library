@@ -13,11 +13,7 @@ function slide(container, options) {
 		isInTransition: false,
 		
 		x: 0,
-		distanceX: 0,
-		startX: 0,
-		pointX: 0,
-		startTime: 0,
-		endTime: 0
+		pointX: 0
 	};
 	
 	var config = {
@@ -54,17 +50,15 @@ function slide(container, options) {
 			.on('click', '[data-ctrl="next"]', next)
 			.on('click', '[data-ctrl="play"]', auto)
 			.on('click', '[data-ctrl="stop"]', stop);
-		touch();
 	}
 	
 	function touch() {
-		$(document).on('touchstart', '.item-list', function (e) {
+		$(document).on('touchstart', '.view', function (e) {
 			var point = e.originalEvent.touches ? e.originalEvent.touches[0] : e.originalEvent;
-			
 			detect.pointX = point.pageX;
 		});
 		
-		$(document).on('touchmove', '.item-list', function (e) {
+		$(document).on('touchmove', '.view', function (e) {
 			$(this).css({'pointer-events': 'none'});
 			
 			var point = e.originalEvent.touches ? e.originalEvent.touches[0] : e.originalEvent;
@@ -74,11 +68,12 @@ function slide(container, options) {
 			detect.pointX = point.pageX;
 			detect.distanceX += deltaX;
 			newX = detect.x + deltaX;
-			$(this).find('.item').css(detect.style.transform, 'translate3d(' + newX + 'px, 0, 0)');
+			
+			$(this).find('.view-item').css(detect.style.transform, 'translate3d(' + newX + 'px, 0, 0)');
 			detect.x = newX;
 		});
 		
-		$(document).on('touchend ,touchcancel', '.item-list', function (e) {
+		$(document).on('touchend ,touchcancel', '.view', function (e) {
 			$(this).css({'pointer-events': 'auto'});
 		});
 	}
@@ -126,7 +121,7 @@ function slide(container, options) {
 		
 		var to = direction(index, dir),
 			speed = 500,
-			func = 'cubic-bezier(0.1, 0.54, 0, 1.01)';
+			func = 'cubic-bezier(0.1, 0.54, 0.4, 1)';
 		
 		if(detect.transform){
 			if(detect.isInTransition){
@@ -183,6 +178,6 @@ function slide(container, options) {
 
 $(document).ready(function () {
 	slide($('.slide-1'), {
-		item: '.item'
+		item: '.view-item'
 	});
 });

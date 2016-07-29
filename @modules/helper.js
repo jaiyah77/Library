@@ -60,10 +60,17 @@ demoon.helper = (function ($){
 		return false;
 	}
 	
+	function addEvent(type, selector, fn, scope){
+		$(document).on(type, selector, function(e){
+			fn.call(scope, e);
+		});
+	}
+	
 	return {
 		Stack: Stack,
 		List: List,
 		getBtnTarget: getBtnTarget,
-		hasProperty: hasProperty
+		hasProperty: hasProperty,
+		addEvent:addEvent
 	}
 }(window.jQuery));

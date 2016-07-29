@@ -15,9 +15,9 @@ img {border:0 none; font-size: 0;line-height: 0;}
 .gallery-view .ctrl .view-ctrl { position: absolute;width: 100%;height: 380px;z-index: 1000; top: 0;left: 0;}
 .gallery-view .ctrl .scroll-wrap {background: #fff; z-index: 2;}
 .gallery-view .view-list {position: relative;z-index: 0;height: 425px;width: 700px;overflow: hidden;}
-.gallery-view .view-list .item {position: absolute;display: none;top: 0;left: 0;z-index: 1;}
-.gallery-view .view-list .item.active {display: block;z-index: 2;}
-.gallery-view .view-list .item .text {text-align: right;margin-top: 20px;}
+.gallery-view .view-list .view-item{position: absolute;display: none;top: 0;left: 0;z-index: 1;}
+.gallery-view .view-list .view-item.active {display: block;z-index: 2;}
+.gallery-view .view-list .view-item .text {text-align: right;margin-top: 20px;}
 
 .gallery-view .ctrl .thumbnail-link a.active:before {
 	content: ''; border: 1px solid #83807e; display: block; position: absolute; top: 0;left: 0;bottom: 0;right: 0;z-index: 1;
