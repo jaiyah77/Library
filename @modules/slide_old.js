@@ -3,21 +3,14 @@
  */
 
 function slide(container, options){
-	if(!container.length){
+	if(! container.length){
 		return;
 	}
 	
 	var detect = {
 		isPlay: false,
 		style: {},
-		isInTransition: false,
-		
-		x: 0,
-		distanceX: 0,
-		startX: 0,
-		pointX: 0,
-		startTime: 0,
-		endTime: 0
+		isInTransition: false
 	};
 	
 	var config = {
@@ -27,7 +20,7 @@ function slide(container, options){
 	
 	var dirValue = {
 		'left': 100,
-		'right': -100
+		'right': - 100
 	};
 	
 	$.extend(config, options);
@@ -54,32 +47,21 @@ function slide(container, options){
 		.on('click', '[data-ctrl="next"]', next)
 		.on('click', '[data-ctrl="play"]', auto)
 		.on('click', '[data-ctrl="stop"]', stop);
+		
 		touch();
 	}
 	
+	
 	function touch(){
 		$(document).on('touchstart', '.item-list', function(e){
-			var point = e.originalEvent.touches ? e.originalEvent.touches[0] : e.originalEvent;
-			detect.distanceX = 0;
-			detect.startX = detect.x;
-			detect.pointX = point.pageX;
+			console.log(e);
 		});
 		
 		$(document).on('touchmove', '.item-list', function(e){
-			$(this).css({'pointer-events': 'none'});
-			
 			var point = e.originalEvent.touches ? e.originalEvent.touches[0] : e.originalEvent;
-			var deltaX = point.pageX - detect.pointX,
-				newX;
 			
-			detect.pointX = point.pageX;
-			detect.distanceX += deltaX;
-			
-			newX = detect.x + deltaX;
-			console.log(newX);
-			
-			$(this).find('.item').css(detect.style.transform, 'translate3d(' + newX + 'px, 0, 0)');
-			
+			console.log(point);
+			$(this).css({'pointer-events': 'none'});
 		});
 		
 		$(document).on('touchend ,touchcancel', '.item-list', function(e){
@@ -101,11 +83,11 @@ function slide(container, options){
 	}
 	
 	function next(){
-		slideTo(detect.current == detect.max ? detect.min : +detect.current + 1, 'left');
+		slideTo(detect.current == detect.max ? detect.min : + detect.current + 1, 'left');
 	}
 	
 	function prev(){
-		slideTo(detect.current == detect.min ? detect.max : +detect.current - 1, 'right');
+		slideTo(detect.current == detect.min ? detect.max : + detect.current - 1, 'right');
 	}
 	
 	function auto(){
@@ -148,7 +130,7 @@ function slide(container, options){
 			
 			setTimeout(function(){
 				detect.item.eq(index).css(detect.style.transform, 'translate3d( 0, 0, 0)');
-				detect.item.eq(detect.current).css(detect.style.transform, 'translate3d(' + -dirValue[to] + '%, 0, 0)');
+				detect.item.eq(detect.current).css(detect.style.transform, 'translate3d(' + - dirValue[to] + '%, 0, 0)');
 			}, 10);
 			
 			detect.item.eq(detect.current).one('transitionend', function(){
@@ -162,7 +144,7 @@ function slide(container, options){
 			
 			detect.item.eq(index).addClass('active').css({'left': dirValue[to] + '%'});
 			detect.item.eq(index).animate({'left': 0}, speed);
-			detect.item.eq(detect.current).animate({'left': -dirValue[to] + '%'}, speed, function(){
+			detect.item.eq(detect.current).animate({'left': - dirValue[to] + '%'}, speed, function(){
 				$(this).removeClass('active');
 				detect.current = index;
 				slideEnd();

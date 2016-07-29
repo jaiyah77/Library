@@ -70,7 +70,7 @@
 			var _vendor = (function(){
 				var vendors = ['transform', 'webkitTransform', 'MozTransform', 'msTransform', 'OTransform'];
 				
-				for(var i = 0, max = vendors.length; i < max; i ++){
+				for(var i = 0, max = vendors.length; i < max; i++){
 					if(vendors[i] in document.createElement('div').style){
 						return vendors[i].substr(0, vendors[i].length - 9);
 					}
@@ -127,8 +127,8 @@
 			}
 			
 			function _offset(element){
-				var left = - element.offsetLeft,
-					top = - element.offsetTop;
+				var left = -element.offsetLeft,
+					top = -element.offsetTop;
 				
 				while(element = element.offsetParent){
 					left -= element.offsetLeft;
@@ -148,7 +148,7 @@
 					duration,
 					deceleration = 0.006;
 				
-				destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? - 1 : 1 );
+				destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
 				duration = (speed / deceleration) * 2.5;
 				
 				if(destination < lowerMargin){
@@ -220,7 +220,7 @@
 				_getTime: Date.now || function(){
 					return new Date().getTime();
 				},
-				_isBadAndroid: /Android /.test(window.navigator.appVersion) && ! (/Chrome\/\d/.test(window.navigator.appVersion))
+				_isBadAndroid: /Android /.test(window.navigator.appVersion) && !(/Chrome\/\d/.test(window.navigator.appVersion))
 			}
 		}()),
 		
@@ -244,7 +244,7 @@
 			this._utils._addEvent(this.scroller, 'oTransitionEnd', this._transitionEnd, this);
 			this._utils._addEvent(this.scroller, 'MSTransitionEnd', this._transitionEnd, this);
 			
-			if(! this.detect.isMobile){
+			if(!this.detect.isMobile){
 				this._utils._addEvent(this.wrapper, 'mousedown', this._start, this);
 				this._utils._addEvent($(window), 'mousemove', this._move, this);
 				this._utils._addEvent($(window), 'mousecancel', this._end, this);
@@ -268,7 +268,7 @@
 			
 			this.detect.itemLength = this.detect.itemLength = items.length;
 			
-			for(i = 0; i < this.detect.itemLength; i ++){
+			for(i = 0; i < this.detect.itemLength; i++){
 				this.detect.scrollerWidth += $(items[i]).outerWidth();
 				this.detect.scrollerWidth += parseInt($(items[i]).css('margin-right'));
 				this.detect.scrollerWidth += parseInt($(items[i]).css('margin-left'));
@@ -277,12 +277,12 @@
 				left = parseInt($(items[i]).prev().css('margin-left')) == 'NaN' ? left + parseInt($(items[i]).prev().css('margin-left')) : left;
 				left = parseInt($(items[i]).prev().css('margin-right')) == 'NaN' ? left + parseInt($(items[i]).prev().css('margin-left')) : left;
 				right = left + $(items[i]).outerWidth() + parseInt($(items[i]).prev().css('margin-left')) + parseInt($(items[i]).prev().css('margin-right'));
-				this.detect.itemLeftPositon.push(- left);
-				this.detect.itemRightPositon.push(- right);
+				this.detect.itemLeftPositon.push(-left);
+				this.detect.itemRightPositon.push(-right);
 			}
 			
 			if(selector.length > 1){
-				for(i = 0; i < selector.length - 1; i ++){
+				for(i = 0; i < selector.length - 1; i++){
 					parentWidth += parseInt(this.scroller.find(">" + selector[i]).css('padding-left'));
 					parentWidth += parseInt(this.scroller.find(">" + selector[i]).css('padding-right'));
 					parentWidth += parseInt(this.scroller.find(">" + selector[i]).css('margin-right'));
@@ -312,14 +312,14 @@
 		},
 		
 		_startPosition: function(selector){
-			if(! this.detect.hasHorizontalScroll){
+			if(!this.detect.hasHorizontalScroll){
 				return;
 			}
 			
 			
 			selector = selector || 'selected';
 			
-			var selectedItemIndex = - 1;
+			var selectedItemIndex = -1;
 			
 			this.scroller.find(this.options.item).each(function(index){
 				if($(this).hasClass(selector)){
@@ -363,7 +363,7 @@
 			pos = this._getComputedPosition(scrollTarget[0]);
 			x = Math.round(pos.x);
 			
-			if(! (this.options.ui == "flick") || ! (this.options.ui == "card") && this._utils._isBadAndroid){
+			if(!(this.options.ui == "flick") || !(this.options.ui == "card") && this._utils._isBadAndroid){
 				var time = this.scroller.css(this._utils._style.transitionDuration, '0.001s');
 			}
 			
@@ -373,7 +373,7 @@
 		_start: function(e){
 			e.stopPropagation();
 			
-			if((this.options.ui == "scroll") && ! this.detect.hasHorizontalScroll){
+			if((this.options.ui == "scroll") && !this.detect.hasHorizontalScroll){
 				this.detect.enabled = false;
 				return;
 			}
@@ -402,7 +402,7 @@
 		_move: function(e){
 			e.stopPropagation();
 			
-			if((this.detect.isMobile && e.originalEvent.touches.length > 1) || ! this.detect.enabled || ! this.detect.hasHorizontalScroll && ! (this.options.ui == "flick" || this.options.ui == "card")){
+			if((this.detect.isMobile && e.originalEvent.touches.length > 1) || !this.detect.enabled || !this.detect.hasHorizontalScroll && !(this.options.ui == "flick" || this.options.ui == "card")){
 				return;
 			}
 			
@@ -426,16 +426,16 @@
 			absDistX = Math.abs(this.detect.distanceX);
 			absDistY = Math.abs(this.detect.distanceY);
 			
-			this.detect.isScrolling = ! ! ( this.detect.isScrolling || absDistX < absDistY );
+			this.detect.isScrolling = !!( this.detect.isScrolling || absDistX < absDistY );
 			
-			if(! this.detect.isScrolling){
+			if(!this.detect.isScrolling){
 				e.preventDefault();
 			}else{
 				return;
 			}
 			
 			newX = this.detect.x + deltaX;
-			this.detect.directionX = deltaX > 0 ? - 1 : deltaX < 0 ? 1 : 0;
+			this.detect.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
 			
 			newX = (this.options.ui != "flick" && this.options.ui != 'card') ? newX > 0 || newX < this.detect.maxScrollX ? this.detect.x + deltaX / 3 : newX : newX;
 			
@@ -454,7 +454,7 @@
 		_end: function(e){
 			e.stopPropagation();
 			
-			if(! this.detect.hasHorizontalScroll && ! (this.options.ui == 'flick') && ! (this.options.ui == 'card')){
+			if(!this.detect.hasHorizontalScroll && !(this.options.ui == 'flick') && !(this.options.ui == 'card')){
 				return;
 			}
 			
@@ -520,7 +520,7 @@
 			var itemWidth = this.scroller.find(this.options.item)[0].offsetWidth,
 				x = Math[query](Math.abs(this.detect.x / itemWidth)) * itemWidth;
 			this.detect.snapId = Math.round(Math.abs(this.detect.x / itemWidth));
-			this._scrollTo(this.scroller, - x, this.detect.bounceTime / 2);
+			this._scrollTo(this.scroller, -x, this.detect.bounceTime / 2);
 		},
 		
 		_initFlick: function(){
@@ -573,7 +573,7 @@
 			
 			if(this.options.ui == 'card'){
 				
-				if(! this.detect.flickEnabled){
+				if(!this.detect.flickEnabled){
 					this.detect.flickEnabled = true;
 					
 					contents = '<div class="' + className + ' current"></div>';
@@ -604,7 +604,7 @@
 				return;
 			}
 			
-			if(! this.detect.flickEnabled){
+			if(!this.detect.flickEnabled){
 				this.detect.flickEnabled = true;
 				contents = '<div class="' + className + ' current"></div>';
 				contents += '<div class="' + className + ' right"></div>';
@@ -654,7 +654,7 @@
 				
 				this.scroller.find('> .current').css({
 					'left': '50%',
-					'margin-left': - (cardWidth / 2)
+					'margin-left': -(cardWidth / 2)
 				});
 				
 				this.scroller.find('> .right').css({
@@ -668,19 +668,19 @@
 				
 				this.scroller.find('> .left').css({
 					'left': '50%',
-					'margin-left': - (cardWidth + (cardWidth / 2))
+					'margin-left': -(cardWidth + (cardWidth / 2))
 				});
 				
 				this.scroller.find('> .leftprev').css({
 					'left': '50%',
-					'margin-left': - (cardWidth + (cardWidth / 2) + cardWidth)
+					'margin-left': -(cardWidth + (cardWidth / 2) + cardWidth)
 				});
 				return;
 			}
 			
 			this.scroller.find('> .current').css('left', '0');
-			this.scroller.find('> .right').css('left', + this.detect.flickSize + 'px');
-			this.scroller.find('> .left').css('left', - this.detect.flickSize + 'px');
+			this.scroller.find('> .right').css('left', +this.detect.flickSize + 'px');
+			this.scroller.find('> .left').css('left', -this.detect.flickSize + 'px');
 		},
 		
 		_flick: function(distX){
@@ -690,12 +690,12 @@
 				count,
 				speed = 300;
 			
-			if(! this.options.loop){
+			if(!this.options.loop){
 				if((this.detect.flickCount == 0) && ((distX == 'left') || distX > check)){
 					this._resetPosition(this.detect.bounceTime);
 					return;
 				}
-				if(this.detect.flickCount == (this.detect.flickList.length - 1) && ( (distX == 'right') || distX < - check)){
+				if(this.detect.flickCount == (this.detect.flickList.length - 1) && ( (distX == 'right') || distX < -check)){
 					this._resetPosition(this.detect.bounceTime);
 					return;
 				}
@@ -703,12 +703,12 @@
 			
 			if(distX == 'left' || distX > check){
 				direction = (this.options.ui == 'card') ? this.scroller.find('.current').outerWidth() : this.detect.wrapperWidth;
-				count = + 1;
+				count = +1;
 				
-			}else if(distX == 'right' || distX < - check){
-				direction = (this.options.ui == 'card') ? - this.scroller.find('.current').outerWidth() : - this.detect.wrapperWidth;
-				count = - 1;
-			}else if(! this.detect.isInflick){
+			}else if(distX == 'right' || distX < -check){
+				direction = (this.options.ui == 'card') ? -this.scroller.find('.current').outerWidth() : -this.detect.wrapperWidth;
+				count = -1;
+			}else if(!this.detect.isInflick){
 				this._resetPosition(this.detect.bounceTime);
 				return;
 			}
@@ -758,7 +758,7 @@
 				html = '';
 			
 			if(this.options.indicatorType == 'dot'){
-				for(var i = 0; i < length; i ++){
+				for(var i = 0; i < length; i++){
 					indicator = indicator + '<li>' + (i + 1) + '</li>'
 				}
 				html = '<div class="indicator"><ul>' + indicator + '</ul></div>';
@@ -831,7 +831,7 @@
 				var buttonID = $(this)[0].hash.split("#")[1];
 				var index = 0;
 				
-				for(var i = 0; i < scope.detect.flickList.length; i ++){
+				for(var i = 0; i < scope.detect.flickList.length; i++){
 					if(scope.detect.flickList[i][0].id == buttonID){
 						index = i;
 					}
@@ -861,7 +861,7 @@
 			
 			x = this._utils._scrollMoveValue(data.detect.itemRightPositon[num - 2], data.detect.maxScrollX);
 			
-			if(! data.detect.hasHorizontalScroll){
+			if(!data.detect.hasHorizontalScroll){
 				return;
 			}
 			
@@ -922,8 +922,8 @@
 				x,
 				y;
 			matrix = matrix[this._utils._style.transform].split(')')[0].split(', ');
-			x = + (matrix[12] || matrix[4]);
-			y = + (matrix[13] || matrix[5]);
+			x = +(matrix[12] || matrix[4]);
+			y = +(matrix[13] || matrix[5]);
 			return {
 				x: x,
 				y: y
@@ -937,7 +937,7 @@
 				this._setFlickPosition(this.detect.flickCount);
 			}
 			
-			if(! this.detect.hasHorizontalScroll){
+			if(!this.detect.hasHorizontalScroll){
 				this._scrollTo(this.scroller, 0, 0);
 			}else{
 				if(this.options.navi){
@@ -953,7 +953,7 @@
 		return this.each(function(){
 			var $this = $(this);
 			var data = $this.data(pluginName);
-			if(! data){
+			if(!data){
 				$(this).data(pluginName, new Plugin($this, param));
 			}
 		});
