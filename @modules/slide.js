@@ -2,7 +2,7 @@
  * Created by MOON KYUNGTAE
  */
 
-function slide(container, options){
+function slide(container, options) {
 	if(!container.length){
 		return;
 	}
@@ -32,7 +32,7 @@ function slide(container, options){
 	
 	$.extend(config, options);
 	
-	function init(){
+	function init() {
 		setup();
 		
 		if(config.auto){
@@ -40,32 +40,31 @@ function slide(container, options){
 		}
 		
 		$(document)
-		.on('click', '[data-ctrl="prev"], [data-slide], [data-ctrl="prev"], [data-ctrl="next"], [data-ctrl="play"], [data-ctrl="stop"]', function(e){
-			e.preventDefault();
-		})
-		.on('click', '[data-slide]', function(){
-			var index = $(this).attr('data-slide');
-			if(detect.current == index){
-				return;
-			}
-			slideTo(index);
-		})
-		.on('click', '[data-ctrl="prev"]', prev)
-		.on('click', '[data-ctrl="next"]', next)
-		.on('click', '[data-ctrl="play"]', auto)
-		.on('click', '[data-ctrl="stop"]', stop);
+			.on('click', '[data-ctrl="prev"], [data-slide], [data-ctrl="prev"], [data-ctrl="next"], [data-ctrl="play"], [data-ctrl="stop"]', function (e) {
+				e.preventDefault();
+			})
+			.on('click', '[data-slide]', function () {
+				var index = $(this).attr('data-slide');
+				if(detect.current == index){
+					return;
+				}
+				slideTo(index);
+			})
+			.on('click', '[data-ctrl="prev"]', prev)
+			.on('click', '[data-ctrl="next"]', next)
+			.on('click', '[data-ctrl="play"]', auto)
+			.on('click', '[data-ctrl="stop"]', stop);
 		touch();
 	}
 	
-	function touch(){
-		$(document).on('touchstart', '.item-list', function(e){
+	function touch() {
+		$(document).on('touchstart', '.item-list', function (e) {
 			var point = e.originalEvent.touches ? e.originalEvent.touches[0] : e.originalEvent;
-			detect.distanceX = 0;
-			detect.startX = detect.x;
+			
 			detect.pointX = point.pageX;
 		});
 		
-		$(document).on('touchmove', '.item-list', function(e){
+		$(document).on('touchmove', '.item-list', function (e) {
 			$(this).css({'pointer-events': 'none'});
 			
 			var point = e.originalEvent.touches ? e.originalEvent.touches[0] : e.originalEvent;
@@ -74,21 +73,17 @@ function slide(container, options){
 			
 			detect.pointX = point.pageX;
 			detect.distanceX += deltaX;
-			
 			newX = detect.x + deltaX;
-			console.log(newX);
-			
 			$(this).find('.item').css(detect.style.transform, 'translate3d(' + newX + 'px, 0, 0)');
-			
+			detect.x = newX;
 		});
 		
-		$(document).on('touchend ,touchcancel', '.item-list', function(e){
-			console.log(e);
+		$(document).on('touchend ,touchcancel', '.item-list', function (e) {
 			$(this).css({'pointer-events': 'auto'});
 		});
 	}
 	
-	function setup(){
+	function setup() {
 		detect.item = container.find(config.item);
 		detect.min = 0;
 		detect.max = detect.item.length - 1;
@@ -100,23 +95,23 @@ function slide(container, options){
 		detect.style['transitionDuration'] = demoon.helper.hasProperty('transitionDuration');
 	}
 	
-	function next(){
+	function next() {
 		slideTo(detect.current == detect.max ? detect.min : +detect.current + 1, 'left');
 	}
 	
-	function prev(){
+	function prev() {
 		slideTo(detect.current == detect.min ? detect.max : +detect.current - 1, 'right');
 	}
 	
-	function auto(){
+	function auto() {
 		detect.isPlay = setInterval(next, 1000);
 	}
 	
-	function stop(){
+	function stop() {
 		clearInterval(detect.isPlay);
 	}
 	
-	function direction(num, dir){
+	function direction(num, dir) {
 		if(dir){
 			return dir;
 		}
@@ -124,7 +119,7 @@ function slide(container, options){
 		return detect.current > num ? 'right' : 'left';
 	}
 	
-	function slideTo(index, dir){
+	function slideTo(index, dir) {
 		if(detect.item.is(':animated')){
 			return;
 		}
@@ -146,23 +141,23 @@ function slide(container, options){
 			detect.item.eq(index).css(detect.style.transitionTimingFunction, func);
 			detect.item.eq(index).css(detect.style.transform, 'translate3d(' + dirValue[to] + '%, 0, 0)').addClass('active');
 			
-			setTimeout(function(){
+			setTimeout(function () {
 				detect.item.eq(index).css(detect.style.transform, 'translate3d( 0, 0, 0)');
 				detect.item.eq(detect.current).css(detect.style.transform, 'translate3d(' + -dirValue[to] + '%, 0, 0)');
 			}, 10);
 			
-			detect.item.eq(detect.current).one('transitionend', function(){
+			detect.item.eq(detect.current).one('transitionend', function () {
 				$(this).removeClass('active');
 				detect.current = index;
 				slideEnd();
 				detect.isInTransition = false;
 			});
 			
-		}else{
+		} else {
 			
 			detect.item.eq(index).addClass('active').css({'left': dirValue[to] + '%'});
 			detect.item.eq(index).animate({'left': 0}, speed);
-			detect.item.eq(detect.current).animate({'left': -dirValue[to] + '%'}, speed, function(){
+			detect.item.eq(detect.current).animate({'left': -dirValue[to] + '%'}, speed, function () {
 				$(this).removeClass('active');
 				detect.current = index;
 				slideEnd();
@@ -170,7 +165,7 @@ function slide(container, options){
 		}
 	}
 	
-	function slideEnd(){
+	function slideEnd() {
 		console.log('callback');
 	}
 	
@@ -186,7 +181,7 @@ function slide(container, options){
 	}
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
 	slide($('.slide-1'), {
 		item: '.item'
 	});
