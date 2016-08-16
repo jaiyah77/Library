@@ -8,11 +8,11 @@ demoon.helper = (function ($){
 	function getBtnTarget(t){
 		return $(t).attr('data-target') ? $(t).attr('data-target') : t.hash;
 	}
-	
+
 	function Stack(){
 		this.dataStore = [];
 	}
-	
+
 	Stack.prototype = {
 		add: function (data){
 			this.dataStore.push(data);
@@ -21,11 +21,11 @@ demoon.helper = (function ($){
 			return this.dataStore.pop();
 		}
 	};
-	
+
 	function List(){
 		this.dataStore = [];
 	}
-	
+
 	List.prototype = {
 		add: function (data){
 			this.dataStore.push(data);
@@ -47,7 +47,7 @@ demoon.helper = (function ($){
 			return -1;
 		}
 	};
-	
+
 	function hasProperty(style){
 		var upper = style.charAt(0).toUpperCase() + style.substr(1);
 		var props = [style, 'webkit' + upper, 'Moz' + upper, 'O' + upper, 'ms' + upper];
@@ -59,13 +59,13 @@ demoon.helper = (function ($){
 		}
 		return false;
 	}
-	
+
 	function addEvent(type, selector, fn, scope){
 		$(document).on(type, selector, function(e){
 			fn.call(scope, e);
 		});
 	}
-	
+
 	return {
 		Stack: Stack,
 		List: List,
