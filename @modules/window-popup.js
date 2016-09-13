@@ -16,7 +16,7 @@ function windowPopup(){
 		
 		if(name){
 			open.data[name] = window.open(url, '_blank', specs);
-		} else {
+		} else{
 			window.open(url, '_blank', specs);
 		}
 	}

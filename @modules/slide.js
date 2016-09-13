@@ -1,5 +1,5 @@
 /**
- * Created by MOON KYUNGTAE
+ * Created by MOON KYUNG TAE
  */
 
 function Slide(container, options){
@@ -149,6 +149,7 @@ function Slide(container, options){
 
 	init();
 }
+
 Slide.prototype = {
 	slideTo: function(){
 
@@ -172,11 +173,13 @@ Slide.prototype = {
 		if(dir){
 			return dir;
 		}
-		return detect.current > num ? 'right' : 'left';
+	
+			return detect.current > num ? 'right' : 'left';
 	}
 };
 
 $(document).ready(function(){
 	var slide1 = new Slide($('#slide-01'));
+	
 	slide1.init();
 });
