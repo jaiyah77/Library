@@ -7,8 +7,8 @@ function accessibilityFocus(){
 		var next = $(e.target).attr('data-ui-focus-next'),
 			prev = $(e.target).attr('data-ui-focus-prev'),
 			target = next || prev || false;
-
-		if(!target || e.keyCode != 9){
+		
+		if(!target || e.key != 'Tab'){
 			return;
 		}
 
