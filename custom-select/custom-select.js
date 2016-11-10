@@ -15,8 +15,6 @@ function customSelect(selector) {
 		$(this).next().prepend(button);
 	}
 	ojb.each(render);
-	
-	
 }
 
 
