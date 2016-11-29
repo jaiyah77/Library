@@ -6,7 +6,7 @@ var demoon = demoon || {};
 
 demoon.helper = (function($){
 	function getBtnTarget(t){
-		return $(t).attr('data-target') ? $(t).attr('data-target') : t.hash;
+		return $(t).attr('data-target') ? $(t).attr('data-target'): t.hash;
 	}
 	
 	function Stack(){
@@ -66,7 +66,7 @@ demoon.helper = (function($){
 		});
 	}
 	
-	function toggleText(node, t1,t2){
+	function toggleText(node, t1, t2){
 		
 	}
 	
@@ -89,19 +89,28 @@ demoon.helper = (function($){
 }(window.jQuery));
 
 demoon.dic = {
-	agent: navigator.userAgent,
-	
-	browser: (function(dic){
-		return demoon.helper.getTrueKey({
-			'window': dic.agent.match(/windows/i),
-			'mac': dic.agent.match(/macintosh/i)
-		});
+	browser: (function(){
+		var agent = navigator.userAgent;
 		
-	})(this),
-	os: (function(){
 		return demoon.helper.getTrueKey({
-			'window': dic.agent.match(/windows/i),
-			'mac': dic.agent.match(/macintosh/i)
+			'edge': agent.match(/edge/i),
+			'chrome': agent.match(/chrome/i),
+			'ie11': agent.match(/rv:11.0/i),
+			'ie10': agent.match(/msie 10.0/i),
+			'ie9': agent.match(/msie 9.0/i),
+			'ie8': agent.match(/msie 8.0/i),
+			'ie7': agent.match(/msie 7.0/i),
+			'firefox': agent.match(/firefox/i),
+			'safari': agent.match(/safari/i),
+			'opera': agent.match(/opera/i)
 		});
-	})(this)
+	})(),
+	os: (function(){
+		var agent = navigator.userAgent;
+		
+		return demoon.helper.getTrueKey({
+			'window': agent.match(/windows/i),
+			'mac': agent.match(/macintosh/i)
+		});
+	})()
 };

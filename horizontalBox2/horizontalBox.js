@@ -43,6 +43,53 @@
 		this.init();
 	};
 	
+	MyModule.helper = {
+		getTrueKey: function(data){
+			for(var key in data){
+				if(data[key]){
+					return key;
+				}
+			}
+			return false;
+		},
+		addEvent: function(element, type, fn, scope){
+			element.on(type, function(e){
+				fn.call(scope, e);
+			});
+		},
+		removeEvent: function(element, type){
+			element.off(type);
+		},
+		momentum: function(current, start, time, lowerMargin, wrapperSize){
+			var distance = current - start,
+				speed = Math.abs(distance) / time,
+				destination,
+				duration,
+				deceleration = 0.006;
+			
+			destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1: 1 );
+			duration = (speed / deceleration) * 2.5;
+			
+			if(destination < lowerMargin){
+				destination = lowerMargin - ( wrapperSize / 2.5 * ( speed / 8 ) );
+				distance = Math.abs(destination - current);
+				duration = (distance / speed) * 2.5;
+			}else if(destination > 0){
+				destination = wrapperSize / 2.5 * ( speed / 8 );
+				distance = Math.abs(current) + destination;
+				duration = (distance / speed) * 2.5;
+			}
+			
+			return {
+				destination: Math.round(destination),
+				duration: duration
+			};
+		},
+		getTime: Date.now || function(){
+			return new Date().getTime();
+		}
+	};
+	
 	MyModule.dic = {
 		vendor: (function(){
 			var vendors = ['transform', 'webkitTransform', 'MozTransform', 'msTransform', 'OTransform'];
@@ -54,29 +101,16 @@
 			return false;
 		})(),
 		isMobile: (function(){
-			function isAndroid(){
-				return navigator.userAgent.match(/Android/i);
-			}
-			
-			function isBlackBerry(){
-				return navigator.userAgent.match(/BlackBerry/i);
-			}
-			
-			function isiOS(){
-				return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-			}
-			
-			function isOpera(){
-				return navigator.userAgent.match(/Opera Mini/i);
-			}
-			
-			function isWindows(){
-				return navigator.userAgent.match(/IEMobile/i);
-			}
-			
-			return isAndroid() || isiOS() || isBlackBerry() || isOpera() || isWindows();
+			var agent = navigator.userAgent;
+			return MyModule.helper.getTrueKey({
+				'android': agent.match(/Android/i),
+				'blackberry': agent.match(/BlackBerry/i),
+				'opera': agent.match(/Opera Mini/i),
+				'window': agent.match(/IEMobile/i),
+				'ios': agent.match(/iPhone|iPad|iPod/i)
+			});
 		}()),
-		_isBadAndroid: /Android /.test(window.navigator.appVersion) && !(/Chrome\/\d/.test(window.navigator.appVersion))
+		isBadAndroid: /Android /.test(window.navigator.appVersion) && !(/Chrome\/\d/.test(window.navigator.appVersion))
 	};
 	
 	MyModule.prototype = {
@@ -100,25 +134,15 @@
 		},
 		
 		utils: (function(){
-			function prefixStyle(style){
-				if(_vendor === false){
-					return false;
-				}
-				if(_vendor === ''){
-					return style;
-				}
-				return _vendor + style.charAt(0).toUpperCase() + style.substr(1);
-			}
-			
-			function addEvent(element, type, fn, scope){
-				element.on(type, function(e){
-					fn.call(scope, e);
-				});
-			}
-			
-			function removeEvent(element, type){
-				element.off(type);
-			}
+			//function prefixStyle(style){
+			//	if(vendor === false){
+			//		return false;
+			//	}
+			//	if(vendor === ''){
+			//		return style;
+			//	}
+			//	return vendor + style.charAt(0).toUpperCase() + style.substr(1);
+			//}
 			
 			function _offset(element){
 				var left = -element.offsetLeft,
@@ -135,42 +159,16 @@
 				};
 			}
 			
-			function _momentum(current, start, time, lowerMargin, wrapperSize){
-				var distance = current - start,
-					speed = Math.abs(distance) / time,
-					destination,
-					duration,
-					deceleration = 0.006;
-				
-				destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
-				duration = (speed / deceleration) * 2.5;
-				
-				if(destination < lowerMargin){
-					destination = lowerMargin - ( wrapperSize / 2.5 * ( speed / 8 ) );
-					distance = Math.abs(destination - current);
-					duration = (distance / speed) * 2.5;
-				}else if(destination > 0){
-					destination = wrapperSize / 2.5 * ( speed / 8 );
-					distance = Math.abs(current) + destination;
-					duration = (distance / speed) * 2.5;
-				}
-				
-				return {
-					destination: Math.round(destination),
-					duration: duration
-				};
-			}
-			
 			function _flickMapList(current, max){
 				var left,
 					right,
 					leftprev,
 					rightnext;
 				
-				left = (current == 0) ? max - 1 : current - 1;
-				right = (current == max - 1) ? 0 : current + 1;
-				leftprev = ((left - 1) < 0) ? max - 1 : left - 1;
-				rightnext = (right + 1 > max - 1) ? 0 : right + 1;
+				left = (current == 0) ? max - 1: current - 1;
+				right = (current == max - 1) ? 0: current + 1;
+				leftprev = ((left - 1) < 0) ? max - 1: left - 1;
+				rightnext = (right + 1 > max - 1) ? 0: right + 1;
 				
 				return {
 					current: current,
@@ -196,30 +194,29 @@
 			}
 			
 			return {
-				// isMobile: isMobile,
-				// transform: prefixStyle('transform'),
-				// addEvent: addEvent,
-				// removeEvent: removeEvent,
-				// style: {
-				// 	transform: prefixStyle('transform'),
-				// 	transitionTimingFunction: prefixStyle('transitionTimingFunction'),
-				// 	transitionDuration: prefixStyle('transitionDuration'),
-				// 	transitionDelay: prefixStyle('transitionDelay'),
-				// 	transformOrigin: prefixStyle('transformOrigin')
-				// },
-				// _offset: _offset,
-				// _momentum: _momentum,
-				// _flickMapList: _flickMapList,
-				// _scrollMoveValue: _scrollMoveValue,
-				// _getTime: Date.now || function(){
-				// 	return new Date().getTime();
-				// },
-				//
+				//transform: prefixStyle('transform'),
+				//addEvent: addEvent,
+				//removeEvent: removeEvent,
+				//style: {
+				//	transform: prefixStyle('transform'),
+				//	transitionTimingFunction: prefixStyle('transitionTimingFunction'),
+				//	transitionDuration: prefixStyle('transitionDuration'),
+				//	transitionDelay: prefixStyle('transitionDelay'),
+				//	transformOrigin: prefixStyle('transformOrigin')
+				//},
+				//_offset: _offset,
+				//_momentum: _momentum,
+				//_flickMapList: _flickMapList,
+				//_scrollMoveValue: _scrollMoveValue,
+				//_getTime: Date.now || function(){
+				//	return new Date().getTime();
+				//}
 			}
 		}()),
 		
 		init: function(){
-			console.log(MyModule.dic);
+			console.log(MyModule.dic.isMobile);
+			
 			this.detect.isMobile = MyModule.dic.isMobile;
 			
 			// this.setEvents();
@@ -240,13 +237,13 @@
 			this.utils.addEvent(this.scroller, 'oTransitionEnd', this._transitionEnd, this);
 			this.utils.addEvent(this.scroller, 'MSTransitionEnd', this._transitionEnd, this);
 			
-			if(!this.detect.isMobile){
-				this.utils.addEvent(this.wrapper, 'mousedown', this._start, this);
-				this.utils.addEvent($(window), 'mousemove', this._move, this);
-				this.utils.addEvent($(window), 'mousecancel', this._end, this);
-				this.utils.addEvent($(window), 'mouseup', this._end, this);
-				return;
-			}
+			//if(!this.detect.isMobile){
+			//	this.utils.addEvent(this.wrapper, 'mousedown', this._start, this);
+			//	this.utils.addEvent($(window), 'mousemove', this._move, this);
+			//	this.utils.addEvent($(window), 'mousecancel', this._end, this);
+			//	this.utils.addEvent($(window), 'mouseup', this._end, this);
+			//	return;
+			//}
 			
 			this.utils.addEvent(this.wrapper, 'touchstart', this._start, this);
 			this.utils.addEvent(this.wrapper, 'touchmove', this._move, this);
@@ -270,8 +267,8 @@
 				this.detect.scrollerWidth += parseInt($(items[i]).css('margin-left'));
 				
 				left = left + $(items[i]).prev().outerWidth();
-				left = parseInt($(items[i]).prev().css('margin-left')) == 'NaN' ? left + parseInt($(items[i]).prev().css('margin-left')) : left;
-				left = parseInt($(items[i]).prev().css('margin-right')) == 'NaN' ? left + parseInt($(items[i]).prev().css('margin-left')) : left;
+				left = parseInt($(items[i]).prev().css('margin-left')) == 'NaN' ? left + parseInt($(items[i]).prev().css('margin-left')): left;
+				left = parseInt($(items[i]).prev().css('margin-right')) == 'NaN' ? left + parseInt($(items[i]).prev().css('margin-left')): left;
 				right = left + $(items[i]).outerWidth() + parseInt($(items[i]).prev().css('margin-left')) + parseInt($(items[i]).prev().css('margin-right'));
 				this.detect.itemLeftPositon.push(-left);
 				this.detect.itemRightPositon.push(-right);
@@ -312,7 +309,6 @@
 				return;
 			}
 			
-			
 			selector = selector || 'selected';
 			
 			var selectedItemIndex = -1;
@@ -336,15 +332,14 @@
 			var x,
 				scrollTarget;
 			
-			scrollTarget = (this.options.ui == "flick" || this.options.ui == "card") ? this.scroller.find('>' + this.options.flickPanelName) : this.scroller;
+			scrollTarget = (this.options.ui == "flick" || this.options.ui == "card") ? this.scroller.find('>' + this.options.flickPanelName): this.scroller;
 			
-			x = this.detect.x > 0 ? 0 : this.detect.x < this.detect.maxScrollX > 0 ? this.detect.maxScrollX : this.detect.x;
+			x = this.detect.x > 0 ? 0: this.detect.x < this.detect.maxScrollX > 0 ? this.detect.maxScrollX: this.detect.x;
 			
 			if(x == this.detect.x){
 				return false;
 			}
 			this._scrollTo(scrollTarget, x, time);
-			
 			
 			return true;
 		},
@@ -354,12 +349,12 @@
 			
 			var pos,
 				x,
-				scrollTarget = (this.options.ui == "flick" || this.options.ui == "card" ) ? this.scroller.find('>' + this.options.flickPanelName) : this.scroller;
+				scrollTarget = (this.options.ui == "flick" || this.options.ui == "card" ) ? this.scroller.find('>' + this.options.flickPanelName): this.scroller;
 			
 			pos = this._getComputedPosition(scrollTarget[0]);
 			x = Math.round(pos.x);
 			
-			if(!(this.options.ui == "flick") || !(this.options.ui == "card") && this.utils._isBadAndroid){
+			if(!(this.options.ui == "flick") || !(this.options.ui == "card") && this.utils.isBadAndroid){
 				var time = this.scroller.css(this.utils.style.transitionDuration, '0.001s');
 			}
 			
@@ -386,7 +381,7 @@
 				this._stop();
 			}
 			
-			var point = e.originalEvent.touches ? e.originalEvent.touches[0] : e.originalEvent;
+			var point = e.originalEvent.touches ? e.originalEvent.touches[0]: e.originalEvent;
 			
 			this.detect.distanceX = 0;
 			this.detect.distanceY = 0;
@@ -404,7 +399,7 @@
 			
 			this.scroller.css({'pointer-events': 'none'});
 			
-			var point = e.originalEvent.touches ? e.originalEvent.touches[0] : e.originalEvent;
+			var point = e.originalEvent.touches ? e.originalEvent.touches[0]: e.originalEvent;
 			
 			var deltaX = point.pageX - this.detect.pointX,
 				deltaY = point.pageY - this.detect.pointY,
@@ -431,9 +426,9 @@
 			}
 			
 			newX = this.detect.x + deltaX;
-			this.detect.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
+			this.detect.directionX = deltaX > 0 ? -1: deltaX < 0 ? 1: 0;
 			
-			newX = (this.options.ui != "flick" && this.options.ui != 'card') ? newX > 0 || newX < this.detect.maxScrollX ? this.detect.x + deltaX / 3 : newX : newX;
+			newX = (this.options.ui != "flick" && this.options.ui != 'card') ? newX > 0 || newX < this.detect.maxScrollX ? this.detect.x + deltaX / 3: newX: newX;
 			
 			if(timestamp - this.detect.endTime > 300 && absDistX < 10){
 				return;
@@ -477,7 +472,7 @@
 			if((this.detect.distanceX != 0) && duration < 200){
 				if(this.options.momentum){
 					var scope = this;
-					var delay = this.detect.isMobile ? 50 : 200;
+					var delay = this.detect.isMobile ? 50: 200;
 					momentumX = this.utils._momentum(this.detect.x, this.detect.startX, duration, this.detect.maxScrollX, this.detect.wrapperWidth);
 					
 					this.detect.isInTransition = true;
@@ -497,13 +492,12 @@
 					
 				}else{
 					if(this.options.snap){
-						var query = this.detect.directionX == 1 ? 'ceil' : 'floor';
+						var query = this.detect.directionX == 1 ? 'ceil': 'floor';
 						this._snap(query);
 						this._resetPosition(this.detect.bounceTime);
 					}
 				}
 			}else{
-				
 				
 				if(this.options.snap){
 					this._snap('round');
@@ -698,11 +692,11 @@
 			}
 			
 			if(distX == 'left' || distX > check){
-				direction = (this.options.ui == 'card') ? this.scroller.find('.current').outerWidth() : this.detect.wrapperWidth;
+				direction = (this.options.ui == 'card') ? this.scroller.find('.current').outerWidth(): this.detect.wrapperWidth;
 				count = +1;
 				
 			}else if(distX == 'right' || distX < -check){
-				direction = (this.options.ui == 'card') ? -this.scroller.find('.current').outerWidth() : -this.detect.wrapperWidth;
+				direction = (this.options.ui == 'card') ? -this.scroller.find('.current').outerWidth(): -this.detect.wrapperWidth;
 				count = -1;
 			}else if(!this.detect.isInflick){
 				this._resetPosition(this.detect.bounceTime);
@@ -718,7 +712,7 @@
 			this._scrollTo(this.scroller.find('>' + this.options.flickPanelName), direction, speed);
 			
 			this.detect.flickCount = this.detect.flickCount - count;
-			this.detect.flickCount = this.detect.flickCount < 0 ? this.detect.flickCount = this.detect.flickList.length - 1 : this.detect.flickCount > this.detect.flickList.length - 1 ? this.detect.flickCount = 0 : this.detect.flickCount;
+			this.detect.flickCount = this.detect.flickCount < 0 ? this.detect.flickCount = this.detect.flickList.length - 1: this.detect.flickCount > this.detect.flickList.length - 1 ? this.detect.flickCount = 0: this.detect.flickCount;
 			
 			if(this.options.navi){
 				this._naviMove(this.detect.flickCount);
@@ -851,7 +845,6 @@
 				time = 300,
 				data = wrapper.data()[pluginName];
 			
-			
 			$(target.selector + '.selected').removeClass('selected');
 			target.eq(num).addClass('selected');
 			
@@ -908,7 +901,7 @@
 		},
 		
 		transitionEnd: function(){
-			var moveTarget = (this.options.ui == "flick" || this.options.ui == "card") ? this.scroller.find('>' + this.options.flickPanelName) : this.scroller;
+			var moveTarget = (this.options.ui == "flick" || this.options.ui == "card") ? this.scroller.find('>' + this.options.flickPanelName): this.scroller;
 			this._transitionTime(moveTarget);
 			this.detect.isInTransition = false;
 		},
@@ -948,13 +941,12 @@
 	MyModule.constructor = MyModule;
 	
 	if(exports === window){
-		typeof exports.UI === 'undefined' ? exports.UI = {} : exports.UI;
+		typeof exports.UI === 'undefined' ? exports.UI = {}: exports.UI;
 		exports.UI[moduleName] = MyModule;
 	}else{
 		exports[moduleName] = MyModule;
 	}
-}(typeof exports === 'undefined' ? window : exports));
-
+}(typeof exports === 'undefined' ? window: exports));
 
 //run
 new UI.horizontalBox('.scroll-sample-01', {}, function(){

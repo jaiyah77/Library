@@ -104,7 +104,6 @@ pre{
 	outline-offset:5px;
 }
 .scroll-sample-01 .scroller ul li{
-	float:left;
 	width:100px;
 	height:125px;
 	padding:5px;
