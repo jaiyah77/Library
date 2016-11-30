@@ -6,9 +6,11 @@
 	var moduleName = 'horizontalBox';
 	
 	var MyModule = function(node, param, callback){
+		this.store = [];
 		this.options = $.extend({}, this.defaults, param);
 		this.wrapper = $(node);
-		this.scroller = $(node).find('ul').wrap('<div class="scroller"></div>');
+		this.scroller = 'null';
+		
 		this.detect = {
 			bounceTime: 400,
 			directionX: '',
@@ -27,6 +29,7 @@
 			isInTransition: false,
 			isMobile: false,
 			itemLength: 0,
+			itemList: [],
 			itemLeftPositon: [],
 			itemRightPositon: [],
 			maxScrollX: 0,
@@ -51,39 +54,6 @@
 				}
 			}
 			return false;
-		},
-		addEvent: function(element, type, fn, scope){
-			element.on(type, function(e){
-				fn.call(scope, e);
-			});
-		},
-		removeEvent: function(element, type){
-			element.off(type);
-		},
-		momentum: function(current, start, time, lowerMargin, wrapperSize){
-			var distance = current - start,
-				speed = Math.abs(distance) / time,
-				destination,
-				duration,
-				deceleration = 0.006;
-			
-			destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1: 1 );
-			duration = (speed / deceleration) * 2.5;
-			
-			if(destination < lowerMargin){
-				destination = lowerMargin - ( wrapperSize / 2.5 * ( speed / 8 ) );
-				distance = Math.abs(destination - current);
-				duration = (distance / speed) * 2.5;
-			}else if(destination > 0){
-				destination = wrapperSize / 2.5 * ( speed / 8 );
-				distance = Math.abs(current) + destination;
-				duration = (distance / speed) * 2.5;
-			}
-			
-			return {
-				destination: Math.round(destination),
-				duration: duration
-			};
 		},
 		getTime: Date.now || function(){
 			return new Date().getTime();
@@ -122,7 +92,7 @@
 			flickPanelName: '.flick-panel',
 			indicator: false,
 			indicatorType: 'dot',
-			item: '',
+			item: '> ul > li',
 			loop: true,
 			momentum: true,
 			navi: '',
@@ -133,94 +103,11 @@
 			ui: 'scroll'
 		},
 		
-		utils: (function(){
-			//function prefixStyle(style){
-			//	if(vendor === false){
-			//		return false;
-			//	}
-			//	if(vendor === ''){
-			//		return style;
-			//	}
-			//	return vendor + style.charAt(0).toUpperCase() + style.substr(1);
-			//}
-			
-			function _offset(element){
-				var left = -element.offsetLeft,
-					top = -element.offsetTop;
-				
-				while(element = element.offsetParent){
-					left -= element.offsetLeft;
-					top -= element.offsetTop;
-				}
-				
-				return {
-					left: left,
-					top: top
-				};
-			}
-			
-			function _flickMapList(current, max){
-				var left,
-					right,
-					leftprev,
-					rightnext;
-				
-				left = (current == 0) ? max - 1: current - 1;
-				right = (current == max - 1) ? 0: current + 1;
-				leftprev = ((left - 1) < 0) ? max - 1: left - 1;
-				rightnext = (right + 1 > max - 1) ? 0: right + 1;
-				
-				return {
-					current: current,
-					left: left,
-					right: right,
-					leftprev: leftprev,
-					rightnext: rightnext
-				}
-			}
-			
-			function _scrollMoveValue(left, max){
-				left = left || 0;
-				
-				if(left > 0){
-					left = 0;
-				}
-				
-				if(left < max){
-					left = max;
-				}
-				
-				return left;
-			}
-			
-			return {
-				//transform: prefixStyle('transform'),
-				//addEvent: addEvent,
-				//removeEvent: removeEvent,
-				//style: {
-				//	transform: prefixStyle('transform'),
-				//	transitionTimingFunction: prefixStyle('transitionTimingFunction'),
-				//	transitionDuration: prefixStyle('transitionDuration'),
-				//	transitionDelay: prefixStyle('transitionDelay'),
-				//	transformOrigin: prefixStyle('transformOrigin')
-				//},
-				//_offset: _offset,
-				//_momentum: _momentum,
-				//_flickMapList: _flickMapList,
-				//_scrollMoveValue: _scrollMoveValue,
-				//_getTime: Date.now || function(){
-				//	return new Date().getTime();
-				//}
-			}
-		}()),
-		
 		init: function(){
-			console.log(MyModule.dic.isMobile);
-			
 			this.detect.isMobile = MyModule.dic.isMobile;
 			
-			// this.setEvents();
-			// this.setScroll();
+			this.setEvents();
+			this.setScroll();
 			// this.refresh();
 			// this.startPosition();
 			//
@@ -230,138 +117,49 @@
 		},
 		
 		setEvents: function(){
-			this.utils.addEvent($(window), 'orientationchange', this._resize, this);
-			this.utils.addEvent($(window), 'resize', this._resize, this);
-			this.utils.addEvent(this.scroller, 'transitionend', this._transitionEnd, this);
-			this.utils.addEvent(this.scroller, 'webkitTransitionEnd', this._transitionEnd, this);
-			this.utils.addEvent(this.scroller, 'oTransitionEnd', this._transitionEnd, this);
-			this.utils.addEvent(this.scroller, 'MSTransitionEnd', this._transitionEnd, this);
+			$(window).on('orientationchange resize', this.resize);
+			$(document).on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', '[data-M-Slider] .scroller', this.transitionEnd);
 			
-			//if(!this.detect.isMobile){
-			//	this.utils.addEvent(this.wrapper, 'mousedown', this._start, this);
-			//	this.utils.addEvent($(window), 'mousemove', this._move, this);
-			//	this.utils.addEvent($(window), 'mousecancel', this._end, this);
-			//	this.utils.addEvent($(window), 'mouseup', this._end, this);
-			//	return;
-			//}
-			
-			this.utils.addEvent(this.wrapper, 'touchstart', this._start, this);
-			this.utils.addEvent(this.wrapper, 'touchmove', this._move, this);
-			this.utils.addEvent(this.wrapper, 'touchcancel', this._end, this);
-			this.utils.addEvent(this.wrapper, 'touchend', this._end, this);
-		},
-		
-		setScroll: function(){
-			var i,
-				items = this.scroller.find(this.options.item),
-				left = 0,
-				right = 0,
-				selector = this.options.item.split(' '),
-				parentWidth = 0;
-			
-			this.detect.itemLength = this.detect.itemLength = items.length;
-			
-			for(i = 0; i < this.detect.itemLength; i++){
-				this.detect.scrollerWidth += $(items[i]).outerWidth();
-				this.detect.scrollerWidth += parseInt($(items[i]).css('margin-right'));
-				this.detect.scrollerWidth += parseInt($(items[i]).css('margin-left'));
+			if(!this.detect.isMobile){
+				$(document).on('mousedown', '[data-M-Slider] .scroller', this.start);
+				$(document).on('mousemove', '[data-M-Slider] .scroller', this.move);
+				$(document).on('mousecancel mouseup', '[data-M-Slider] .scroller', this.end);
 				
-				left = left + $(items[i]).prev().outerWidth();
-				left = parseInt($(items[i]).prev().css('margin-left')) == 'NaN' ? left + parseInt($(items[i]).prev().css('margin-left')): left;
-				left = parseInt($(items[i]).prev().css('margin-right')) == 'NaN' ? left + parseInt($(items[i]).prev().css('margin-left')): left;
-				right = left + $(items[i]).outerWidth() + parseInt($(items[i]).prev().css('margin-left')) + parseInt($(items[i]).prev().css('margin-right'));
-				this.detect.itemLeftPositon.push(-left);
-				this.detect.itemRightPositon.push(-right);
-			}
-			
-			if(selector.length > 1){
-				for(i = 0; i < selector.length - 1; i++){
-					parentWidth += parseInt(this.scroller.find(">" + selector[i]).css('padding-left'));
-					parentWidth += parseInt(this.scroller.find(">" + selector[i]).css('padding-right'));
-					parentWidth += parseInt(this.scroller.find(">" + selector[i]).css('margin-right'));
-					parentWidth += parseInt(this.scroller.find(">" + selector[i]).css('margin-right'));
-					parentWidth += parseInt(this.scroller.find(">" + selector[i]).css('border-right-width'));
-					parentWidth += parseInt(this.scroller.find(">" + selector[i]).css('border-left-width'));
-				}
-			}
-			
-			this.detect.scrollerWidth += parentWidth;
-			if(this.options.ui != 'flick' && this.options.ui != 'card'){
-				this.scroller.css({
-					'width': (this.detect.scrollerWidth)
-				});
-				
-			}
-		},
-		
-		refresh: function(){
-			this.detect.wrapperWidth = this.wrapper[0].clientWidth;
-			this.detect.flickSize = this.detect.wrapperWidth;
-			this.detect.scrollerWidth = this.scroller[0].offsetWidth;
-			this.detect.maxScrollX = this.detect.wrapperWidth - this.detect.scrollerWidth;
-			this.detect.endTime = 0;
-			this.detect.wrapperOffset = this.utils._offset(this.wrapper[0]);
-			this.detect.hasHorizontalScroll = this.detect.maxScrollX < 0;
-		},
-		
-		startPosition: function(selector){
-			if(!this.detect.hasHorizontalScroll){
 				return;
 			}
 			
-			selector = selector || 'selected';
-			
-			var selectedItemIndex = -1;
-			
-			this.scroller.find(this.options.item).each(function(index){
-				if($(this).hasClass(selector)){
-					selectedItemIndex = index;
-				}
-			});
-			
-			this.options.startX = this.utils._scrollMoveValue(this.detect.itemRightPositon[selectedItemIndex - 2], this.detect.maxScrollX);
-			
-			//console.log(this.options.startX);
-			
-			this._scrollTo(this.scroller, this.options.startX, 0);
+			$(document).on('touchstart', '[data-M-Slider] .scroller', this.start);
+			$(document).on('touchmove', '[data-M-Slider] .scroller', this.move);
+			$(document).on('touchcancel touchend', '[data-M-Slider] .scroller', this.end);
 		},
 		
-		resetPosition: function(time){
-			time = time || 0;
+		setScroll: function(){
+			this.wrapper.prepend('<div class="scroller"></div>');
+			this.scroller = this.wrapper.find('>.scroller');
+			this.scroller.nextAll().appendTo(this.scroller);
 			
-			var x,
-				scrollTarget;
+			var items = this.scroller.find(this.options.item),
+				left = 0,
+				right = 0;
 			
-			scrollTarget = (this.options.ui == "flick" || this.options.ui == "card") ? this.scroller.find('>' + this.options.flickPanelName): this.scroller;
+			this.detect.itemLength = items.length;
 			
-			x = this.detect.x > 0 ? 0: this.detect.x < this.detect.maxScrollX > 0 ? this.detect.maxScrollX: this.detect.x;
-			
-			if(x == this.detect.x){
-				return false;
-			}
-			this._scrollTo(scrollTarget, x, time);
-			
-			return true;
-		},
-		
-		stop: function(){
-			this.detect.isInTransition = false;
-			
-			var pos,
-				x,
-				scrollTarget = (this.options.ui == "flick" || this.options.ui == "card" ) ? this.scroller.find('>' + this.options.flickPanelName): this.scroller;
-			
-			pos = this._getComputedPosition(scrollTarget[0]);
-			x = Math.round(pos.x);
-			
-			if(!(this.options.ui == "flick") || !(this.options.ui == "card") && this.utils.isBadAndroid){
-				var time = this.scroller.css(this.utils.style.transitionDuration, '0.001s');
+			for(var i = 0; i < this.detect.itemLength; i++){
+				left = (i == 0) ? 0 : left + $(items[i]).prev().outerWidth(true);
+				right = left + $(items[i]).outerWidth(true);
+				this.detect.itemLeftPositon.push(-left);
+				this.detect.itemRightPositon.push(-right);
+				
+				this.detect.scrollerWidth += $(items[i]).outerWidth(true);
 			}
 			
-			this._scrollTo(scrollTarget, x, time);
+			if(!this.options.ui.match(/flick|card/i)){
+				this.scroller.css({'width': (this.detect.scrollerWidth)});
+			}
 		},
 		
 		start: function(e){
+			console.log(e);
 			e.stopPropagation();
 			
 			if((this.options.ui == "scroll") && !this.detect.hasHorizontalScroll){
@@ -381,7 +179,7 @@
 				this._stop();
 			}
 			
-			var point = e.originalEvent.touches ? e.originalEvent.touches[0]: e.originalEvent;
+			var point = e.originalEvent.touches ? e.originalEvent.touches[0] : e.originalEvent;
 			
 			this.detect.distanceX = 0;
 			this.detect.distanceY = 0;
@@ -399,7 +197,7 @@
 			
 			this.scroller.css({'pointer-events': 'none'});
 			
-			var point = e.originalEvent.touches ? e.originalEvent.touches[0]: e.originalEvent;
+			var point = e.originalEvent.touches ? e.originalEvent.touches[0] : e.originalEvent;
 			
 			var deltaX = point.pageX - this.detect.pointX,
 				deltaY = point.pageY - this.detect.pointY,
@@ -426,9 +224,9 @@
 			}
 			
 			newX = this.detect.x + deltaX;
-			this.detect.directionX = deltaX > 0 ? -1: deltaX < 0 ? 1: 0;
+			this.detect.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
 			
-			newX = (this.options.ui != "flick" && this.options.ui != 'card') ? newX > 0 || newX < this.detect.maxScrollX ? this.detect.x + deltaX / 3: newX: newX;
+			newX = (this.options.ui != "flick" && this.options.ui != 'card') ? newX > 0 || newX < this.detect.maxScrollX ? this.detect.x + deltaX / 3 : newX : newX;
 			
 			if(timestamp - this.detect.endTime > 300 && absDistX < 10){
 				return;
@@ -472,7 +270,7 @@
 			if((this.detect.distanceX != 0) && duration < 200){
 				if(this.options.momentum){
 					var scope = this;
-					var delay = this.detect.isMobile ? 50: 200;
+					var delay = this.detect.isMobile ? 50 : 200;
 					momentumX = this.utils._momentum(this.detect.x, this.detect.startX, duration, this.detect.maxScrollX, this.detect.wrapperWidth);
 					
 					this.detect.isInTransition = true;
@@ -492,7 +290,7 @@
 					
 				}else{
 					if(this.options.snap){
-						var query = this.detect.directionX == 1 ? 'ceil': 'floor';
+						var query = this.detect.directionX == 1 ? 'ceil' : 'floor';
 						this._snap(query);
 						this._resetPosition(this.detect.bounceTime);
 					}
@@ -504,6 +302,149 @@
 					this._resetPosition(this.detect.bounceTime);
 				}
 			}
+		},
+		
+		scrollMoveValue: function(left, max){
+			left = left || 0;
+			
+			if(left > 0){
+				left = 0;
+			}
+			
+			if(left < max){
+				left = max;
+			}
+			
+			return left;
+		},
+		
+		flickMapList: function(current, max){
+			var left,
+				right,
+				leftprev,
+				rightnext;
+			
+			left = (current == 0) ? max - 1 : current - 1;
+			right = (current == max - 1) ? 0 : current + 1;
+			leftprev = ((left - 1) < 0) ? max - 1 : left - 1;
+			rightnext = (right + 1 > max - 1) ? 0 : right + 1;
+			
+			return {
+				current: current,
+				left: left,
+				right: right,
+				leftprev: leftprev,
+				rightnext: rightnext
+			}
+		},
+		
+		momentum: function(current, start, time, lowerMargin, wrapperSize){
+			var distance = current - start,
+				speed = Math.abs(distance) / time,
+				destination,
+				duration,
+				deceleration = 0.006;
+			
+			destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
+			duration = (speed / deceleration) * 2.5;
+			
+			if(destination < lowerMargin){
+				destination = lowerMargin - ( wrapperSize / 2.5 * ( speed / 8 ) );
+				distance = Math.abs(destination - current);
+				duration = (distance / speed) * 2.5;
+			}else if(destination > 0){
+				destination = wrapperSize / 2.5 * ( speed / 8 );
+				distance = Math.abs(current) + destination;
+				duration = (distance / speed) * 2.5;
+			}
+			
+			return {
+				destination: Math.round(destination),
+				duration: duration
+			};
+		},
+		
+		offset: function(element){
+			var left = -element.offsetLeft,
+				top = -element.offsetTop;
+			
+			while(element = element.offsetParent){
+				left -= element.offsetLeft;
+				top -= element.offsetTop;
+			}
+			
+			return {
+				left: left,
+				top: top
+			};
+		},
+		
+		
+		refresh: function(){
+			this.detect.wrapperWidth = this.wrapper[0].clientWidth;
+			this.detect.flickSize = this.detect.wrapperWidth;
+			this.detect.scrollerWidth = this.scroller[0].offsetWidth;
+			this.detect.maxScrollX = this.detect.wrapperWidth - this.detect.scrollerWidth;
+			this.detect.endTime = 0;
+			this.detect.wrapperOffset = this.utils._offset(this.wrapper[0]);
+			this.detect.hasHorizontalScroll = this.detect.maxScrollX < 0;
+		},
+		
+		startPosition: function(selector){
+			if(!this.detect.hasHorizontalScroll){
+				return;
+			}
+			
+			selector = selector || 'selected';
+			
+			var selectedItemIndex = -1;
+			
+			this.scroller.find(this.options.item).each(function(index){
+				if($(this).hasClass(selector)){
+					selectedItemIndex = index;
+				}
+			});
+			
+			this.options.startX = this.utils._scrollMoveValue(this.detect.itemRightPositon[selectedItemIndex - 2], this.detect.maxScrollX);
+			
+			//console.log(this.options.startX);
+			
+			this._scrollTo(this.scroller, this.options.startX, 0);
+		},
+		
+		resetPosition: function(time){
+			time = time || 0;
+			
+			var x,
+				scrollTarget;
+			
+			scrollTarget = (this.options.ui == "flick" || this.options.ui == "card") ? this.scroller.find('>' + this.options.flickPanelName) : this.scroller;
+			
+			x = this.detect.x > 0 ? 0 : this.detect.x < this.detect.maxScrollX > 0 ? this.detect.maxScrollX : this.detect.x;
+			
+			if(x == this.detect.x){
+				return false;
+			}
+			this._scrollTo(scrollTarget, x, time);
+			
+			return true;
+		},
+		
+		stop: function(){
+			this.detect.isInTransition = false;
+			
+			var pos,
+				x,
+				scrollTarget = (this.options.ui == "flick" || this.options.ui == "card" ) ? this.scroller.find('>' + this.options.flickPanelName) : this.scroller;
+			
+			pos = this._getComputedPosition(scrollTarget[0]);
+			x = Math.round(pos.x);
+			
+			if(!(this.options.ui == "flick") || !(this.options.ui == "card") && this.utils.isBadAndroid){
+				var time = this.scroller.css(this.utils.style.transitionDuration, '0.001s');
+			}
+			
+			this._scrollTo(scrollTarget, x, time);
 		},
 		
 		snap: function(query){
@@ -692,11 +633,11 @@
 			}
 			
 			if(distX == 'left' || distX > check){
-				direction = (this.options.ui == 'card') ? this.scroller.find('.current').outerWidth(): this.detect.wrapperWidth;
+				direction = (this.options.ui == 'card') ? this.scroller.find('.current').outerWidth() : this.detect.wrapperWidth;
 				count = +1;
 				
 			}else if(distX == 'right' || distX < -check){
-				direction = (this.options.ui == 'card') ? -this.scroller.find('.current').outerWidth(): -this.detect.wrapperWidth;
+				direction = (this.options.ui == 'card') ? -this.scroller.find('.current').outerWidth() : -this.detect.wrapperWidth;
 				count = -1;
 			}else if(!this.detect.isInflick){
 				this._resetPosition(this.detect.bounceTime);
@@ -712,7 +653,7 @@
 			this._scrollTo(this.scroller.find('>' + this.options.flickPanelName), direction, speed);
 			
 			this.detect.flickCount = this.detect.flickCount - count;
-			this.detect.flickCount = this.detect.flickCount < 0 ? this.detect.flickCount = this.detect.flickList.length - 1: this.detect.flickCount > this.detect.flickList.length - 1 ? this.detect.flickCount = 0: this.detect.flickCount;
+			this.detect.flickCount = this.detect.flickCount < 0 ? this.detect.flickCount = this.detect.flickList.length - 1 : this.detect.flickCount > this.detect.flickList.length - 1 ? this.detect.flickCount = 0 : this.detect.flickCount;
 			
 			if(this.options.navi){
 				this._naviMove(this.detect.flickCount);
@@ -901,7 +842,7 @@
 		},
 		
 		transitionEnd: function(){
-			var moveTarget = (this.options.ui == "flick" || this.options.ui == "card") ? this.scroller.find('>' + this.options.flickPanelName): this.scroller;
+			var moveTarget = (this.options.ui == "flick" || this.options.ui == "card") ? this.scroller.find('>' + this.options.flickPanelName) : this.scroller;
 			this._transitionTime(moveTarget);
 			this.detect.isInTransition = false;
 		},
@@ -919,8 +860,8 @@
 			};
 		},
 		
-		resize: function(){
-			this._refresh();
+		resize: function(e){
+			this.refresh();
 			
 			if(this.options.ui == "flick" || this.options.ui == "card"){
 				this._setFlickPosition(this.detect.flickCount);
@@ -941,14 +882,14 @@
 	MyModule.constructor = MyModule;
 	
 	if(exports === window){
-		typeof exports.UI === 'undefined' ? exports.UI = {}: exports.UI;
+		typeof exports.UI === 'undefined' ? exports.UI = {} : exports.UI;
 		exports.UI[moduleName] = MyModule;
 	}else{
 		exports[moduleName] = MyModule;
 	}
-}(typeof exports === 'undefined' ? window: exports));
+}(typeof exports === 'undefined' ? window : exports));
 
 //run
-new UI.horizontalBox('.scroll-sample-01', {}, function(){
+new UI.horizontalBox('[data-M-Slider]', {}, function(){
 	console.log(1);
 });
