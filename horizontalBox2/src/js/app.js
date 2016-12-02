@@ -6,7 +6,7 @@
 import test from "./modules/test.js";
 
 class horizontalBox {
-	constructor(geometry, materials){
+	constructor(){
 		console.log(test);
 	}
 }

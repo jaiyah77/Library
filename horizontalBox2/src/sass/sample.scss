@@ -1,0 +1,362 @@
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	font-size:12px;
+	-webkit-user-select:none;
+	-webkit-text-size-adjust:none;
+	background:#dddddd;
+}
+[class*="color-"]{
+	height:320px;
+}
+.color-01{
+	background:#ec971f;
+}
+.color-02{
+	background:#000080;
+}
+.color-03{
+	background:#006600;
+}
+.color-04{
+	background:#ff0000;
+}
+.color-05{
+	background:#EB97B4;
+}
+.color-06{
+	background:#01bef6;
+}
+.color-07{
+	background:#3c510c;
+}
+.color-08{
+	background:#550000;
+}
+.color-09{
+	background:#C6E746;
+}
+.color-10{
+	background:#0d3349;
+}
+h1{
+	width:100%;
+	height:45px;
+	line-height:45px;
+	text-align:center;
+	background:#252519;
+	color:#fff;
+}
+ul, li, ol{
+	list-style:none;
+}
+h2{
+	padding:10px 0 10px 5px;
+	font-family:Verdana, sans-serif;
+	font-size:14px;
+	font-weight:normal;
+}
+.contain{
+	padding:5px;
+	overflow:hidden;
+}
+.sample-box{
+	background:#fff;
+	border:1px solid #eee;
+	position:relative;
+	margin-bottom:20px;
+}
+.desc{
+	padding:5px;
+	font-family:Verdana, sans-serif;
+	font-size:12px;
+}
+.desc-text{
+	margin-top:10px;
+}
+.desc-code{
+	margin-top:10px;
+	border:1px solid #d2d2d2;
+	padding:5px;
+}
+pre{
+	font-family:Verdana, sans-serif;
+	font-size:12px;
+}
+/* scroll-sample-01 */
+.scroll-sample-01{
+}
+.scroll-sample-01 .scroller{
+	width:2105px;
+}
+.scroll-sample-01 .scroller ul:after{
+	content:" ";
+	clear:both;
+	display:block;
+}
+.scroll-sample-01 .scroller ul{
+	margin:0 10px;
+	border:1px solid orange;
+	padding:5px;
+	outline:1px solid black;
+	outline-offset:5px;
+	font-size:0;
+	white-space:nowrap;
+}
+.scroll-sample-01 .scroller ul li{
+	width:100px;
+	height:125px;
+	padding:5px;
+	border:1px solid red;
+	display:inline-block;
+	margin:0 10px;
+	text-align:center;
+}
+.scroll-sample-01 .scroller ul li img{
+	max-width:100%;
+}
+/* scroll-sample-02 */
+.scroll-sample-02 .scroller{
+	width:425px;
+}
+.scroll-sample-02 .scroller ul:after{
+	content:" ";
+	clear:both;
+	display:block;
+}
+.scroll-sample-02 .scroller ul{
+	padding-left:5px;
+}
+.scroll-sample-02 .scroller ul li{
+	float:left;
+	width:100px;
+	height:125px;
+	padding:5px 5px 5px 0;
+	text-align:center;
+}
+.scroll-sample-02 .scroller ul li img{
+	max-width:100%;
+}
+/* scroll-sample-03 */
+.scroll-sample-03 .scroller{
+	width:2105px;
+}
+.scroll-sample-03 .scroller ul:after{
+	content:" ";
+	clear:both;
+	display:block;
+}
+.scroll-sample-03 .scroller ul{
+	padding-left:5px;
+}
+.scroll-sample-03 .scroller ul li{
+	float:left;
+	width:100px;
+	height:125px;
+	padding:5px 5px 5px 0;
+	text-align:center;
+}
+.scroll-sample-03 .scroller ul li img{
+	max-width:100%;
+}
+/* scroll-sample-01 */
+.scroll-sample-04 .scroller{
+	width:2105px;
+}
+.scroll-sample-04 .scroller ul:after{
+	content:" ";
+	clear:both;
+	display:block;
+}
+.scroll-sample-04 .scroller ul{
+	padding-left:5px;
+}
+.scroll-sample-04 .scroller ul li{
+	float:left;
+	width:100px;
+	height:125px;
+	padding:5px 5px 5px 0;
+	text-align:center;
+}
+.scroll-sample-04 .scroller ul li img{
+	max-width:100%;
+}
+/* scroll-sample-05 */
+.scroll-sample-05 .scroller{
+	width:1530px;
+}
+.scroll-sample-05 .scroller ul:after{
+	content:" ";
+	clear:both;
+	display:block;
+}
+.scroll-sample-05 .scroller ul{
+	padding-left:5px;
+}
+.scroll-sample-05 .scroller ul li{
+	float:left;
+	width:300px;
+	height:367px;
+	padding:5px 5px 5px 0;
+	text-align:center;
+}
+.scroll-sample-05 .scroller ul li img{
+	max-width:100%;
+}
+/* scroll-sample-in */
+.scroll-sample-in{
+	overflow:hidden;
+}
+.scroll-sample-in .scroller{
+	width:2105px;
+}
+.scroll-sample-in .scroller ul:after{
+	content:" ";
+	clear:both;
+	display:block;
+}
+.scroll-sample-in .scroller ul{
+	padding-left:5px;
+}
+.scroll-sample-in .scroller ul li{
+	float:left;
+	width:100px;
+	height:125px;
+	padding:5px 5px 5px 0;
+	text-align:center;
+}
+.scroll-sample-in .scroller ul li img{
+	max-width:100%;
+}
+/* card-sample-01 */
+.card-sample-01 .scroller{
+	position:relative;
+	height:268px;
+}
+.card-sample-01 .scroller .flick-panel{
+	position:absolute;
+	top:0;
+	left:0;
+	color:#fff;
+	text-align:center;
+	z-index:0;
+}
+.card-sample-01 .scroller .flick-panel .con{
+	padding:10px;
+	text-align:center;
+}
+.card-sample-01 .scroller .flick-panel img{
+	width:200px;
+}
+/* card-sample-02 */
+.card-sample-02 .scroller{
+	position:relative;
+	height:268px;
+}
+.card-sample-02 .scroller .flick-panel{
+	position:absolute;
+	top:0;
+	left:0;
+	color:#fff;
+	text-align:center;
+	z-index:0;
+}
+.card-sample-02 .scroller .flick-panel .con{
+	padding:10px;
+	text-align:center;
+}
+.card-sample-02 .scroller .flick-panel img{
+	width:200px;
+}
+/* card-sample-in */
+.card-sample-in .scroller{
+	position:relative;
+	height:268px;
+}
+.card-sample-in .scroller .flick-panel{
+	position:absolute;
+	top:0;
+	left:0;
+	color:#fff;
+	text-align:center;
+	z-index:0;
+	overflow:hidden;
+}
+.card-sample-in .scroller .flick-panel .con{
+	padding:10px;
+	text-align:center;
+}
+.card-sample-in .scroller .flick-panel img{
+	width:200px;
+}
+/* flick-sample */
+[class*="flick-sample-"]{
+	overflow:hidden;
+}
+[class*="flick-sample-"] > .scroller{
+	position:relative;
+	height:300px;
+}
+[class*="flick-sample-"] > .scroller > .flick-panel{
+	width:100%;
+	height:300px;
+	overflow:hidden;
+	position:absolute;
+	color:#fff;
+	text-align:center;
+}
+.flick-sample-10 > .scroller{
+	position:relative;
+	height:100px;
+	overflow:hidden;
+}
+.flick-sample-10 > .scroller > .flick-panel{
+	width:100%;
+	height:100px;
+	position:absolute;
+	color:#fff;
+	text-align:center;
+}
+.flick-sample-10 > .scroller > .flick-panel [class*="color-"]{
+	height:100px;
+}
+.flick-sample-in > .scroller{
+	position:relative;
+	height:100px;
+	overflow:hidden;
+}
+.flick-sample-in > .scroller > .flick-panel{
+	width:100%;
+	height:100px;
+	position:absolute;
+	color:#fff;
+	text-align:center;
+}
+.flick-sample-in > .scroller > .flick-panel [class*="color-"]{
+	height:100px;
+}
+.flick-sample-11{
+	width:200px;
+	margin:13px 10px;
+}
+.flick-sample-11 > .scroller, .flick-sample-11 > .scroller > .flick-panel{
+	height:100px;
+}
+.flick-sample-11 > .scroller > .flick-panel [class*="color-"]{
+	height:100px;
+}
+/*control button */
+.indicator{ text-align:center; padding:10px 0; }
+.indicator ul{ display:inline-block; }
+.indicator ul li{ width:10px; height:10px; overflow:hidden; text-indent:-999px; text-align:center; line-height:20px; display:inline-block; background:#ccc; -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px; margin:0 2px; }
+.indicator ul li.on{ background:#C6E746; }
+/* navi */
+.navi .scroller{ width:450px; }
+.navi .scroller ul:after{ content:''; display:block; clear:both; }
+.navi .scroller ul .navi-item{ float:left; text-align:center; width:50px; padding:20px; background:#ccc; }
+.navi .scroller ul .navi-item.selected{ background:#0066CC; color:#fff; }
+.navi .scroller ul .navi-item.selected a{ color:#fff; }
+.navi .scroller ul a{ color:#000; text-decoration:none; }
+.navi .scroller ul a:hover{ color:#000; text-decoration:none; }
