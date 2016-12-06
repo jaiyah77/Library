@@ -219,7 +219,7 @@
 			
 			if(!this.detect.isScrolling){
 				e.preventDefault();
-			}else{
+			} else {
 				return;
 			}
 			
@@ -288,14 +288,14 @@
 					
 					setTimeout(resetPosition, momentumX.duration + delay);
 					
-				}else{
+				} else {
 					if(this.options.snap){
 						var query = this.detect.directionX == 1 ? 'ceil' : 'floor';
 						this._snap(query);
 						this._resetPosition(this.detect.bounceTime);
 					}
 				}
-			}else{
+			} else {
 				
 				if(this.options.snap){
 					this._snap('round');
@@ -352,7 +352,7 @@
 				destination = lowerMargin - ( wrapperSize / 2.5 * ( speed / 8 ) );
 				distance = Math.abs(destination - current);
 				duration = (distance / speed) * 2.5;
-			}else if(destination > 0){
+			} else if(destination > 0){
 				destination = wrapperSize / 2.5 * ( speed / 8 );
 				distance = Math.abs(current) + destination;
 				duration = (distance / speed) * 2.5;
@@ -378,7 +378,6 @@
 				top: top
 			};
 		},
-		
 		
 		refresh: function(){
 			this.detect.wrapperWidth = this.wrapper[0].clientWidth;
@@ -516,7 +515,7 @@
 					this.scroller.append(contents);
 					this.detect.flickPositionNumber = this.utils._flickMapList(num, this.detect.flickList.length);
 					
-				}else{
+				} else {
 					this._updateFlickList(this.detect.flickPositionNumber.current, this.scroller.find('>.current').children());
 					this.scroller.find(">.current." + className).children().detach();
 					this.scroller.find(">.left." + className).children().remove();
@@ -542,7 +541,7 @@
 				contents += '<div class="' + className + ' left"></div>';
 				this.scroller.append(contents);
 				this.detect.flickPositionNumber = this.utils._flickMapList(num, this.detect.flickList.length);
-			}else{
+			} else {
 				this._updateFlickList(this.detect.flickPositionNumber.current, this.scroller.find('> .current').children());
 				this.scroller.find(">.current." + className).children().detach();
 				this.scroller.find(">.left." + className).children().remove();
@@ -554,7 +553,7 @@
 				$(this.scroller.find('> .current')).append(this.detect.flickList[this.detect.flickPositionNumber.current]);
 				$(this.scroller.find('> .left')).append(this.detect.flickList[this.detect.flickPositionNumber.left].clone());
 				$(this.scroller.find('> .right')).append(this.detect.flickList[this.detect.flickPositionNumber.right].clone());
-			}else{
+			} else {
 				if(this.detect.flickPositionNumber.current == 0){
 					this.scroller.find('> .current').append(this.detect.flickList[this.detect.flickPositionNumber.current]);
 					this.scroller.find('> .right').append(this.detect.flickList[this.detect.flickPositionNumber.right].clone());
@@ -636,10 +635,10 @@
 				direction = (this.options.ui == 'card') ? this.scroller.find('.current').outerWidth() : this.detect.wrapperWidth;
 				count = +1;
 				
-			}else if(distX == 'right' || distX < -check){
+			} else if(distX == 'right' || distX < -check){
 				direction = (this.options.ui == 'card') ? -this.scroller.find('.current').outerWidth() : -this.detect.wrapperWidth;
 				count = -1;
-			}else if(!this.detect.isInflick){
+			} else if(!this.detect.isInflick){
 				this._resetPosition(this.detect.bounceTime);
 				return;
 			}
@@ -740,7 +739,7 @@
 				this.wrapper.on('touchend', function(){
 					play = setInterval(interval, speed);
 				});
-			}else{
+			} else {
 				this.wrapper.hover(function(){
 					clearInterval(play);
 				}, function(){
@@ -869,7 +868,7 @@
 			
 			if(!this.detect.hasHorizontalScroll){
 				this._scrollTo(this.scroller, 0, 0);
-			}else{
+			} else {
 				if(this.options.navi){
 					this._naviMove(this.detect.flickCount);
 					return;
@@ -884,7 +883,7 @@
 	if(exports === window){
 		typeof exports.UI === 'undefined' ? exports.UI = {} : exports.UI;
 		exports.UI[moduleName] = MyModule;
-	}else{
+	} else {
 		exports[moduleName] = MyModule;
 	}
 }(typeof exports === 'undefined' ? window : exports));

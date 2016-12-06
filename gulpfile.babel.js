@@ -59,6 +59,7 @@ gulp.task('imagemin', () =>{
  */
 gulp.task('webpack', () =>{
 	return gulp.src(path.webpack.src)
+		.pipe(cache.filter())
 		.pipe(gulpWebpack({
 			devtool: 'source-map',
 			entry: {
@@ -76,8 +77,11 @@ gulp.task('webpack', () =>{
 					}
 				]
 			},
-			plugins: [new webpack.optimize.UglifyJsPlugin()]
+			plugins: [
+				new webpack.optimize.UglifyJsPlugin()
+			]
 		}))
+		.pipe(cache.cache())
 		.pipe(gulp.dest(path.webpack.dist));
 });
 
