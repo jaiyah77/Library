@@ -1,11 +1,6 @@
 /**
  * Created by MOON KYUNG TAE
  *
- *
- * window open & close
- * window.open(URL,name,specs,replace)
- * http://www.w3schools.com/jsref/met_win_open.asp
- * https://developer.mozilla.org/en-US/docs/Web/API/Window/open
  */
 function windowPopup(){
 	function open(e){

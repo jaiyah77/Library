@@ -10,10 +10,10 @@ import webpack from 'webpack';
 
 const cache = new FileCache();
 
-const projectName = 'horizontalBox2';
+const projectName = 'layer';
 const path = {
 	webpack: {
-		src: __dirname + `/${projectName}/src/js/app.js`,
+		src: __dirname + `/${projectName}/src/js/ui.js`,
 		dist: __dirname + `/${projectName}/res/js`
 	},
 	sass: {
@@ -63,7 +63,7 @@ gulp.task('webpack', () =>{
 		.pipe(gulpWebpack({
 			devtool: 'source-map',
 			entry: {
-				app: path.webpack.src
+				ui: path.webpack.src
 			},
 			output: {
 				filename: '[name].js',

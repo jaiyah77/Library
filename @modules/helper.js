@@ -1,13 +1,9 @@
 /**
- * Created by MOON KYUNG TAE
+ * helper function
+ * Created by Moon Kyung tae on 2016-11-04.
  */
-
-var demoon = demoon || {};
-
-demoon.helper = (function($){
-	function getBtnTarget(t){
-		return $(t).attr('data-target') ? $(t).attr('data-target'): t.hash;
-	}
+(function(exports){
+	var moduleName = 'helper';
 	
 	function Stack(){
 		this.dataStore = [];
@@ -48,6 +44,10 @@ demoon.helper = (function($){
 		}
 	};
 	
+	function getBtnTarget(t){
+		return $(t).attr('data-target') ? $(t).attr('data-target') : t.hash;
+	}
+	
 	function hasProperty(style){
 		var upper = style.charAt(0).toUpperCase() + style.substr(1);
 		var props = [style, 'webkit' + upper, 'Moz' + upper, 'O' + upper, 'ms' + upper];
@@ -71,46 +71,26 @@ demoon.helper = (function($){
 	}
 	
 	function getTrueKey(data){
-		for(key in data){
+		for(var key in data){
 			if(data[key]){
 				return key;
 			}
 		}
 	}
 	
-	return {
+	var MyModule = {
 		Stack: Stack,
 		List: List,
 		getBtnTarget: getBtnTarget,
 		hasProperty: hasProperty,
 		addEvent: addEvent,
 		getTrueKey: getTrueKey
+	};
+	
+	if(exports === window){
+		typeof exports.ui === 'undefined' ? exports.ui = {} : exports.ui;
+		exports.ui[moduleName] = MyModule;
+	} else {
+		module.exports = MyModule;
 	}
-}(window.jQuery));
-
-demoon.dic = {
-	browser: (function(){
-		var agent = navigator.userAgent;
-		
-		return demoon.helper.getTrueKey({
-			'edge': agent.match(/edge/i),
-			'chrome': agent.match(/chrome/i),
-			'ie11': agent.match(/rv:11.0/i),
-			'ie10': agent.match(/msie 10.0/i),
-			'ie9': agent.match(/msie 9.0/i),
-			'ie8': agent.match(/msie 8.0/i),
-			'ie7': agent.match(/msie 7.0/i),
-			'firefox': agent.match(/firefox/i),
-			'safari': agent.match(/safari/i),
-			'opera': agent.match(/opera/i)
-		});
-	})(),
-	os: (function(){
-		var agent = navigator.userAgent;
-		
-		return demoon.helper.getTrueKey({
-			'window': agent.match(/windows/i),
-			'mac': agent.match(/macintosh/i)
-		});
-	})()
-};
+}(typeof exports === 'undefined' ? window : exports));

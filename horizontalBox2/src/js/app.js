@@ -8,7 +8,7 @@ import dic from "./modules/dic.js";
 
 class horizontalBox {
 	constructor(node, param, callback){
-		this.store = [];
+		// this.store = [];
 		this.options = $.extend({}, {
 			autoPlay: false,
 			control: false,
@@ -129,7 +129,8 @@ class horizontalBox {
 	start(e){
 		e.stopPropagation();
 		
-		console.log(this);
+		console.dir(this);
+		
 		
 		if((this.options.ui == "scroll") && !this.detect.hasHorizontalScroll){
 			this.detect.enabled = false;

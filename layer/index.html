@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>layer popup</title>
 	<link rel="stylesheet" href="../@common/css/font-awesome.min.css"/>
-	<link rel="stylesheet" href="index.css"/>
+	<link rel="stylesheet" href="src/scss/index.css"/>
 </head>
 <body>
 <h1 class="guide-tit">레이어 팝업</h1>
@@ -32,10 +32,13 @@
 		<a href="#" class="btn close btn-layer-close" data-ui-focus-id="btn-close-03" data-ui-focus-next="layer-03"><span class="sr-only">닫기</span> <span class="fa fa-close"></span></a>
 	</div>
 </div>
+
 <script src="../@common/js/jquery-1.11.2.min.js"></script>
-<script src="../@modules/helper.js"></script>
 <script src="../@modules/a11yFocus.js"></script>
 <script src="../@modules/layer.js"></script>
-<script src="page.js"></script>
+<script>
+	ui.a11yFocus.on();
+	ui.layer();
+</script>
 </body>
 </html>
