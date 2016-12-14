@@ -1,5 +1,7 @@
 'use strict';
 
+const projectName = 'slide';
+
 import gulp from 'gulp';
 import sass from 'gulp-sass';
 import imagemin  from 'gulp-imagemin';
@@ -10,7 +12,8 @@ import webpack from 'webpack';
 
 const cache = new FileCache();
 
-const projectName = 'layer';
+
+
 const path = {
 	webpack: {
 		src: __dirname + `/${projectName}/src/js/ui.js`,
@@ -89,7 +92,7 @@ gulp.task('webpack', () =>{
  * watch
  */
 gulp.task('watch', () =>{
-	gulp.watch(path.webpack.src, ['webpack']);
+	// gulp.watch(path.webpack.src, ['webpack']);
 	gulp.watch(path.sass.src, ['sass']);
 });
 

@@ -1,0 +1,32 @@
+@import "../../../@common/css/_reset";
+
+[class*="slide-"]{
+	width:468px;
+	margin:20px auto;
+	border:1px solid #ddd;
+	padding:20px;
+	
+	.scroller{
+		
+		> ul{
+			position:absolute;
+			top:0;
+			left:0;
+			font-size:0;
+			white-space:nowrap;
+			overflow:hidden;
+			
+			> li{
+				font-size:12px;
+				display:inline-block;
+				border:1px solid #ddd;
+				width:100px;
+				height:100px;
+				margin-left:20px;
+				&:first-child{
+					margin-left:0;
+				}
+			}
+		}
+	}
+}
